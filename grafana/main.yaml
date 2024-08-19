@@ -1,0 +1,10 @@
+apps:
+  - id: "grafana"
+    name: "Grafana"
+    image: "grafana/grafana:10.4.2"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    port: 3000
+    disks:
+      - name: "data"
+        mountTo: "/var/lib/grafana"

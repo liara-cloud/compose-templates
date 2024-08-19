@@ -1,0 +1,23 @@
+apps:
+  - id: "matomo"
+    name: "Matomo"
+    image: "matomo:4-apache"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    port: 80
+    disks:
+      - name: "data"
+        mountTo: "/var/www/html"
+    envs:
+      MATOMO_DATABASE_ADAPTER: "mysql"
+      MATOMO_DATABASE_HOST: "$DB_main_HOST:$DB_main_PORT"
+      MATOMO_DATABASE_USERNAME: "$DB_main_USER"
+      MATOMO_DATABASE_PASSWORD: "$DB_main_PASSWORD"
+      MATOMO_DATABASE_DBNAME: "matomo"
+
+databases:
+  - type: "mariadb"
+    id: "main"
+    version: "10.6.8"
+    bundlePlanID: "standard"
+    planID: "small-g2"

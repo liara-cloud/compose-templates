@@ -1,0 +1,14 @@
+apps:
+  - id: "chrome"
+    name: "Chrome"
+    image: "browserless/chrome:1.61-chrome-stable"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    port: 3000
+    envs:
+      TOKEN: "$RANDOM_STRING"
+      MAX_CONCURRENT_SESSIONS: "5"
+      CONNECTION_TIMEOUT: "30000"
+      ENABLE_DEBUGGER: "true"
+      ENABLE_CORS: "false"
+      EXIT_ON_HEALTH_FAILURE: "true"

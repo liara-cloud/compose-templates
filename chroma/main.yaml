@@ -1,0 +1,14 @@
+apps:
+  - id: "chroma"
+    name: "Chroma"
+    image: "chromadb/chroma:0.5.1.dev16"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    disks:
+      - name: "data"
+        mountTo: "/chroma/chroma"
+    port: 8000
+    envs:
+      CHROMA_SERVER_AUTH_CREDENTIALS: "$RANDOM_STRING"
+      CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER: "chromadb.auth.token.TokenConfigServerAuthCredentialsProvider"
+      CHROMA_SERVER_AUTH_PROVIDER: "chromadb.auth.token.TokenAuthServerProvider"

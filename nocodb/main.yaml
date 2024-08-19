@@ -1,0 +1,10 @@
+apps:
+  - id: "nocodb"
+    name: "NocoDB"
+    image: "nocodb/nocodb:0.205.1"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    port: 8080
+    disks:
+      - name: "data"
+        mountTo: "/usr/app/data"

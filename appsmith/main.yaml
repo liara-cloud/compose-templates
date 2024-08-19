@@ -1,0 +1,10 @@
+apps:
+  - id: "appsmith"
+    name: "Appsmith"
+    image: "appsmith/appsmith-ee:v1.22.1"
+    bundlePlanID: "standard"
+    planID: "medium-g2"
+    disks:
+      - name: "data"
+        mountTo: "/appsmith-stacks"
+    port: 80

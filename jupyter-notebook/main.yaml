@@ -1,0 +1,10 @@
+apps:
+  - id: "jupyter-notebook"
+    name: "Jupyter Notebook"
+    image: "quay.io/jupyter/datascience-notebook:2024-05-27"
+    bundlePlanID: "standard"
+    planID: "medium-g2"
+    port: 8888
+    disks:
+      - name: "data"
+        mountTo: "/home/jovyan/work"

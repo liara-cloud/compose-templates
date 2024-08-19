@@ -1,0 +1,26 @@
+apps:
+  - id: "ghost"
+    name: "Ghost"
+    image: "ghost:5"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    disks:
+      - name: "content"
+        mountTo: "/var/lib/ghost/content"
+    port: 2368
+    envs:
+      NODE_ENV: "production"
+      url: "https://$APP_NAME.liara.run"
+      database__client: "mysql"
+      database__connection__host: "$DB_main_HOST"
+      database__connection__port: "$DB_main_PORT"
+      database__connection__user: "$DB_main_USER"
+      database__connection__password: "$DB_main_PASSWORD"
+      database__connection__database: "ghost"
+
+databases:
+  - type: "mariadb"
+    id: "main"
+    version: "10.6.8"
+    bundlePlanID: "standard"
+    planID: "small-g2"

@@ -1,0 +1,27 @@
+apps:
+  - id: "ackee"
+    name: "Ackee"
+    image: "electerious/ackee:3.4.2"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    disks:
+      - name: "root"
+        mountTo: "/root"
+        size: 10
+        maxSize: 0.2
+      - name: "dist"
+        mountTo: "/srv/app/dist"
+    port: 3000
+    envs:
+      ACKEE_USERNAME: "ackee"
+      ACKEE_PASSWORD: "$RANDOM_STRING"
+      ACKEE_PORT: "3000"
+      ACKEE_ALLOW_ORIGIN: "https://$APP_NAME.liara.run"
+      ACKEE_MONGODB: "mongodb://$DB_main_USER:$DB_main_PASSWORD@$DB_main_HOST:$DB_main_PORT/ackee?authSource=admin"
+
+databases:
+  - type: "mongodb"
+    id: "main"
+    version: "7.0.5"
+    bundlePlanID: "standard"
+    planID: "small-g2"

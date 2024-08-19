@@ -1,0 +1,41 @@
+apps:
+  - id: "mattermost"
+    name: "Mattermost"
+    image: "mattermost/mattermost-team-edition:9.7.2"
+    bundlePlanID: "pro"
+    planID: "small-g2"
+    disks:
+      - name: "logs"
+        mountTo: "/mattermost/logs"
+        size: 10
+        maxSize: 0.1
+      - name: "plugins"
+        mountTo: "/mattermost/plugins"
+        size: 10
+        maxSize: 0.5
+      - name: "client-plugins"
+        mountTo: "/mattermost/client/plugins"
+        size: 10
+        maxSize: 0.1
+      - name: "config"
+        mountTo: "/mattermost/config"
+        size: 10
+        maxSize: 0.1
+      - name: "temp"
+        mountTo: "/tmp"
+        size: 10
+        maxSize: 2
+      - name: "data"
+        mountTo: "/mattermost/data"
+    port: 8065
+    envs:
+      MM_SQLSETTINGS_DATASOURCE: "postgresql://$DB_main_USER:$DB_main_PASSWORD@$DB_main_HOST:$DB_main_PORT/postgres?sslmode=disable&connect_timeout=10"
+      MM_SERVICESETTINGS_SITEURL: 'https://$APP_NAME.liara.run'
+
+
+databases:
+  - type: "postgres"
+    id: "main" 
+    version: "16.1" 
+    bundlePlanID: "standard"
+    planID: "small-g2"

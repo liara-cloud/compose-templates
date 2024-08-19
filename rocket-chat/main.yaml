@@ -1,0 +1,27 @@
+apps:
+  - id: "rocketChat"
+    name: "Rocket.Chat"
+    image: "rocket.chat:6.7"
+    bundlePlanID: "standard"
+    planID: "medium-g2"
+    port: 3000
+    disks:
+      - name: "uploads"
+        mountTo: "/app/uploads"
+    envs:
+      NODE_ENV: "production"
+      ROOT_URL: "https://$APP_NAME.liara.run"
+      PORT: "3000"
+      MONGO_URL: "mongodb://$DB_main_USER:$DB_main_PASSWORD@$DB_main_HOST:$DB_main_PORT/rocket-chat?authSource=admin&replicaSet=rs0&directConnection=true"
+      MONGO_OPLOG_URL: "mongodb://$DB_main_USER:$DB_main_PASSWORD@$DB_main_HOST:$DB_main_PORT/local?authSource=admin&replicaSet=rs0&directConnection=true"
+      FileUpload_Storage_Type: "FileSystem"
+      FileUpload_FileSystemPath: "/app/uploads"
+
+databases:
+  - type: "mongodb"
+    id: "main"
+    version: "7.0.5"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    options:
+      standaloneReplicaSet: true

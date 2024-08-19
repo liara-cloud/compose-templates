@@ -1,0 +1,25 @@
+apps:
+  - id: "metabase"
+    name: "Metabase"
+    image: "liaracloud/metabase-one-click-app:v0.49.7"
+    bundlePlanID: "standard"
+    planID: "medium-g2"
+    port: 3000
+    disks:
+      - name: "tmp"
+        mountTo: "/tmp"
+    envs:
+      MB_DB_TYPE: "postgres"
+      MB_DB_DBNAME: "postgres"
+      MB_DB_USER: "$DB_main_USER"
+      MB_DB_PASS: "$DB_main_PASSWORD"
+      MB_DB_HOST: "$DB_main_HOST"
+      MB_DB_PORT: "$DB_main_PORT"
+      JAVA_TIMEZONE: "Asia/Tehran"
+
+databases:
+  - type: "postgres"
+    id: "main"
+    version: "16.1"
+    bundlePlanID: "standard"
+    planID: "small-g2"

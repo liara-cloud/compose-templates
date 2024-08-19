@@ -1,0 +1,27 @@
+apps:
+  - id: "odoo"
+    name: "Odoo"
+    image: "odoo:17.0"
+    bundlePlanID: "standard"
+    planID: "medium-g2"
+    port: 8069
+    args: ["--proxy-mode"]
+    disks:
+      - name: "addons"
+        mountTo: "/mnt/extra-addons"
+        size: 10
+        maxSize: 0.5
+      - name: "data"
+        mountTo: "/var/lib/odoo"
+    envs:
+      HOST: "$DB_main_HOST"
+      PORT: "$DB_main_PORT"
+      USER: "$DB_main_USER"
+      PASSWORD: "$DB_main_PASSWORD"
+
+databases:
+  - type: "postgres"
+    id: "main"
+    version: "15.4"
+    bundlePlanID: "standard"
+    planID: "small-g2"

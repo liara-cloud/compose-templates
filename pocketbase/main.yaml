@@ -1,0 +1,22 @@
+apps:
+  - id: "pocketbase"
+    name: "PocketBase"
+    image: "liaracloud/pocketbase-one-click-app:0.22.10"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    port: 8090
+    disks:
+      - name: "public"
+        mountTo: "/pb_public"
+        size: 10
+        maxSize: 0.1
+      - name: "migrations"
+        mountTo: "/pb_migrations"
+        size: 10
+        maxSize: 0.1
+      - name: "hooks"
+        mountTo: "/pb_hooks"
+        size: 10
+        maxSize: 0.1
+      - name: "data"
+        mountTo: "/pb_data"

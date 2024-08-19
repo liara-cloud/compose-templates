@@ -1,0 +1,40 @@
+apps:
+  - id: "kibana"
+    name: "Kibana"
+    image: "liaracloud/kibana-one-click-app:8.11.1"
+    bundlePlanID: "standard"
+    planID: "medium-g2"
+    port: 5601
+    disks:
+      - name: "data"
+        mountTo: "/bitnami/kibana"
+        size: 70
+        maxSize: 10
+      - name: "config"
+        mountTo: "/opt/bitnami/kibana/config"
+        size: 10
+        maxSize: 0.1
+      - name: "plugins"
+        mountTo: "/opt/bitnami/kibana/plugins"
+        size: 10
+        maxSize: 0.2
+      - name: "tmp"
+        mountTo: "/opt/bitnami/kibana/tmp"
+        size: 10
+        maxSize: 0.2
+    envs:
+      KIBANA_PASSWORD: "$RANDOM_STRING"
+      KIBANA_ELASTICSEARCH_URL: "$DB_main_HOST"
+      KIBANA_ELASTICSEARCH_PORT_NUMBER: "$DB_main_PORT"
+      KIBANA_ELASTICSEARCH_PASSWORD: "$DB_main_PASSWORD"
+      KIBANA_CREATE_USER: "1"
+      KIBANA_SERVER_NAME: "$APP_NAME"
+      KIBANA_SERVER_PUBLICBASEURL: "https://$APP_NAME.liara.run"
+      KIBANA_INITSCRIPTS_START_SERVER: "no"
+
+databases:
+  - type: "elasticsearch"
+    id: "main"
+    version: "8.11.1"
+    bundlePlanID: "standard"
+    planID: "standard-base-g2"

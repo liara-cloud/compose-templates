@@ -1,0 +1,28 @@
+apps:
+  - id: "nextcloud"
+    name: "NextCloud"
+    image: "nextcloud:29"
+    bundlePlanID: "standard"
+    planID: "standard-base-g2"
+    port: 80
+    disks:
+      - name: "tmp"
+        mountTo: "/tmp"
+        size: 10
+        maxSize: 1
+      - name: "data"
+        mountTo: "/var/www/html"
+    envs:
+      OVERWRITEHOST: "$APP_NAME.liara.run"
+      OVERWRITEPROTOCOL: "https"
+      MYSQL_HOST: "$DB_main_HOST:$DB_main_PORT"
+      MYSQL_USER: "$DB_main_USER"
+      MYSQL_PASSWORD: "$DB_main_PASSWORD"
+      MYSQL_DATABASE: "nextcloud"
+
+databases:
+  - type: "mariadb"
+    id: "main"
+    version: "11.2.3"
+    bundlePlanID: "standard"
+    planID: "small-g2"

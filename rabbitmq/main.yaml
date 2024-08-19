@@ -1,0 +1,13 @@
+apps:
+  - id: "rabbitmq"
+    name: "RabbitMQ"
+    image: "rabbitmq:3.13-management"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    port: 15672
+    disks:
+      - name: "data"
+        mountTo: "/var/lib/rabbitmq"
+    envs:
+      RABBITMQ_DEFAULT_USER: "root"
+      RABBITMQ_DEFAULT_PASS: "$RANDOM_STRING"

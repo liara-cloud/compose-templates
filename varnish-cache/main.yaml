@@ -1,0 +1,21 @@
+apps:
+  - id: "varnish"
+    name: "Varnish"
+    image: "varnish:7.5.0"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    port: 80
+    disks:
+      - name: "cache"
+        mountTo: "/var/lib/varnish"
+        size: 10
+        maxSize: 2
+      - name: "config"
+        mountTo: "/etc/varnish"
+        size: 10
+        maxSize: 0.5
+    envs:
+      VARNISH_BACKEND_HOST: "my_host"
+      VARNISH_BACKEND_PORT: "8000"
+      VARNISH_TTL: "3600"
+      VARNISH_SIZE: "2G"

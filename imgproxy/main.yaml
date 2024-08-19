@@ -1,0 +1,12 @@
+apps:
+  - id: "imgproxy"
+    name: "Imgproxy"
+    image: "darthsim/imgproxy:v3"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    port: 80
+    envs:
+      IMGPROXY_BIND: ":80"
+      IMGPROXY_KEY: ""
+      IMGPROXY_SALT: ""
+      IMGPROXY_SECRET: ""

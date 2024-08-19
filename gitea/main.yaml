@@ -1,0 +1,18 @@
+apps:
+  - id: "gitea"
+    name: "Gitea"
+    image: "gitea/gitea:1.21.1-rootless"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    port: 3000
+    disks:
+      - name: "config"
+        mountTo: "/etc/gitea"
+        size: 10
+        maxSize: 0.1
+      - name: "data"
+        mountTo: "/var/lib/gitea"
+    envs:
+      GITEA__SERVER__ROOT_URL: "https://$APP_NAME.liara.run"
+      GITEA__TIME__DEFAULT_UI_LOCATION: "Asia/Tehran"
+      GITEA__SERVER__DISABLE_SSH: "true"

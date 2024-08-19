@@ -1,0 +1,12 @@
+apps:
+  - id: "soketi"
+    name: "Soketi"
+    image: "quay.io/soketi/soketi:1.6-16-debian"
+    bundlePlanID: "free"
+    planID: "small-g2"
+    port: 6001
+    envs:
+      SOKETI_DEFAULT_APP_ID: "pusher"
+      SOKETI_DEFAULT_APP_KEY: "$RANDOM_STRING"
+      SOKETI_DEFAULT_APP_SECRET: "$RANDOM_STRING"
+      HOME: "/tmp"

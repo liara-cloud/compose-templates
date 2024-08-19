@@ -1,0 +1,10 @@
+apps:
+  - id: "apache-answer"
+    name: "Apache Answer"
+    image: "apache/answer:1.3.0"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    disks:
+      - name: "data"
+        mountTo: "/data"
+    port: 80

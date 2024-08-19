@@ -1,0 +1,17 @@
+apps:
+  - id: "n8n"
+    name: "n8n"
+    image: "n8nio/n8n:1.36.4"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    port: 5678
+    disks:
+      - name: "data"
+        mountTo: "/home/node/.n8n"
+    envs:
+      N8N_DIAGNOSTICS_ENABLED: "false"
+      N8N_VERSION_NOTIFICATIONS_ENABLED: "false"
+      N8N_TEMPLATES_ENABLED: "false"
+      GENERIC_TIMEZONE: "Asia/Tehran"
+      TZ: "Asia/Tehran"
+      WEBHOOK_URL: "https://$APP_NAME.liara.run"

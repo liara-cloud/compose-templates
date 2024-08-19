@@ -1,0 +1,14 @@
+apps:
+  - id: "meilisearch"
+    name: "Meilisearch"
+    image: "getmeili/meilisearch:v1.7"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    port: 7700
+    disks:
+      - name: "data"
+        mountTo: "/meili_data"
+    envs:
+      MEILI_MASTER_KEY: "$RANDOM_STRING"
+      MEILI_ENV: "production"
+      MEILI_NO_ANALYTICS: "true"
