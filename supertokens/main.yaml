@@ -1,0 +1,22 @@
+apps:
+  - id: "supertoken"
+    name: "SuperToken"
+    image: "registry.supertokens.io/supertokens/supertokens-mysql"
+   
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    port: 3567
+    envs:
+      MYSQL_USER: "$DB_main_USER"
+      MYSQL_HOST: "$DB_main_HOST"
+      MYSQL_PORT: "$DB_main_PORT"
+      MYSQL_PASSWORD: "$DB_main_PASSWORD"
+      MYSQL_DATABASE_NAME: "$DB_main_NAME"
+      MYSQL_CONNECTION_POOL_SIZE: "10"
+
+databases:
+  - type: "mysql"
+    id: "main"
+    version: "8.0.30"
+    bundlePlanID: "standard"
+    planID: "medium-g2"

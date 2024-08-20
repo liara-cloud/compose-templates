@@ -1,0 +1,10 @@
+{
+    "image": "quay.io/jupyter/datascience-notebook:2024-05-27",
+    "port": 8888, 
+    "disks": [
+        {
+            "name": "data",
+            "mountTo": "/home/jovyan/work"
+        }
+    ]
+}

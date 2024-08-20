@@ -1,0 +1,4 @@
+{
+    "image": "registry.supertokens.io/supertokens/supertokens-mysql",
+    "port": "3567"
+}
