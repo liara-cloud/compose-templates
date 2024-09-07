@@ -1,7 +1,7 @@
 apps:
   - id: "nextcloud"
     name: "NextCloud"
-    image: "nextcloud:29"
+    image: "registry.c2.liara.ir/one-click-apps/nextcloud:29"
     bundlePlanID: "standard"
     planID: "standard-base-g2"
     port: 80

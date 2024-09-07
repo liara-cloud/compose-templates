@@ -1,7 +1,7 @@
 apps:
   - id: "ghost"
     name: "Ghost"
-    image: "ghost:5"
+    image: "registry.c2.liara.ir/one-click-apps/ghost:5"
     bundlePlanID: "standard"
     planID: "small-g2"
     disks:

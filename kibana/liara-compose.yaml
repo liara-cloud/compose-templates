@@ -1,7 +1,7 @@
 apps:
   - id: "kibana"
     name: "Kibana"
-    image: "liaracloud/kibana-one-click-app:8.11.1"
+    image: "registry.c2.liara.ir/one-click-apps/liaracloud/kibana-one-click-app:8.11.1"
     bundlePlanID: "standard"
     planID: "medium-g2"
     port: 5601

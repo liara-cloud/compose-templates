@@ -1,7 +1,7 @@
 apps:
   - id: "grafana"
     name: "Grafana"
-    image: "grafana/grafana:10.4.2"
+    image: "registry.c2.liara.ir/one-click-apps/grafana/grafana:10.4.2"
     bundlePlanID: "standard"
     planID: "small-g2"
     port: 3000

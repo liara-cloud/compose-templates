@@ -1,7 +1,7 @@
 apps:
   - id: "imgproxy"
     name: "Imgproxy"
-    image: "darthsim/imgproxy:v3"
+    image: "registry.c2.liara.ir/one-click-apps/darthsim/imgproxy:v3"
     bundlePlanID: "standard"
     planID: "small-g2"
     port: 80

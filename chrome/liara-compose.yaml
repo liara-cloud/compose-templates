@@ -1,7 +1,7 @@
 apps:
   - id: "chrome"
     name: "Chrome"
-    image: "browserless/chrome:1.61-chrome-stable"
+    image: "registry.c2.liara.ir/one-click-apps/browserless/chrome:1.61-chrome-stable"
     bundlePlanID: "standard"
     planID: "small-g2"
     port: 3000

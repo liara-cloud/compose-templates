@@ -1,7 +1,7 @@
 apps:
   - id: "ackee"
     name: "Ackee"
-    image: "electerious/ackee:3.4.2"
+    image: "registry.c2.liara.ir/one-click-apps/electerious/ackee:3.4.2"
     bundlePlanID: "standard"
     planID: "small-g2"
     disks:

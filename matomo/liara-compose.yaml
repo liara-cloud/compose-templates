@@ -1,7 +1,7 @@
 apps:
   - id: "matomo"
     name: "Matomo"
-    image: "matomo:4-apache"
+    image: "registry.c2.liara.ir/one-click-apps/matomo:4-apache"
     bundlePlanID: "standard"
     planID: "small-g2"
     port: 80

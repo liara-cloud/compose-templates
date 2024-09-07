@@ -1,7 +1,7 @@
 apps:
   - id: "meilisearch"
     name: "Meilisearch"
-    image: "getmeili/meilisearch:v1.7"
+    image: "registry.c2.liara.ir/one-click-apps/getmeili/meilisearch:v1.7"
     bundlePlanID: "standard"
     planID: "small-g2"
     port: 7700

@@ -1,7 +1,7 @@
 apps:
   - id: "supertoken"
     name: "SuperToken"
-    image: "registry.supertokens.io/supertokens/supertokens-mysql"
+    image: "registry.c2.liara.ir/one-click-apps/registry.supertokens.io/supertokens/supertokens-mysql"
    
     bundlePlanID: "standard"
     planID: "small-g2"

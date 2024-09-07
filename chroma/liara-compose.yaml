@@ -1,7 +1,7 @@
 apps:
   - id: "chroma"
     name: "Chroma"
-    image: "chromadb/chroma:0.5.1.dev16"
+    image: "registry.c2.liara.ir/one-click-apps/chromadb/chroma:0.5.1.dev16"
     bundlePlanID: "standard"
     planID: "small-g2"
     disks:

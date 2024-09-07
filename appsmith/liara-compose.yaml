@@ -1,7 +1,7 @@
 apps:
   - id: "appsmith"
     name: "Appsmith"
-    image: "appsmith/appsmith-ee:v1.22.1"
+    image: "registry.c2.liara.ir/one-click-apps/appsmith/appsmith-ee:v1.22.1"
     bundlePlanID: "standard"
     planID: "medium-g2"
     disks:

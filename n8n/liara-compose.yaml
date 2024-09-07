@@ -1,7 +1,7 @@
 apps:
   - id: "n8n"
     name: "n8n"
-    image: "n8nio/n8n:1.36.4"
+    image: "registry.c2.liara.ir/one-click-apps/n8nio/n8n:1.36.4"
     bundlePlanID: "standard"
     planID: "small-g2"
     port: 5678

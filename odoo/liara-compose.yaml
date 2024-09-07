@@ -1,7 +1,7 @@
 apps:
   - id: "odoo"
     name: "Odoo"
-    image: "odoo:17.0"
+    image: "registry.c2.liara.ir/one-click-apps/odoo:17.0"
     bundlePlanID: "standard"
     planID: "medium-g2"
     port: 8069

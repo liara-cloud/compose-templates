@@ -1,7 +1,7 @@
 apps:
   - id: "apache-answer"
     name: "Apache Answer"
-    image: "apache/answer:1.3.0"
+    image: "registry.c2.liara.ir/one-click-apps/apache/answer:1.3.0"
     bundlePlanID: "standard"
     planID: "small-g2"
     disks:

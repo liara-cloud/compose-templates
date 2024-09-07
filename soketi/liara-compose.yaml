@@ -1,7 +1,7 @@
 apps:
   - id: "soketi"
     name: "Soketi"
-    image: "quay.io/soketi/soketi:1.6-16-debian"
+    image: "registry.c2.liara.ir/one-click-apps/quay.io/soketi/soketi:1.6-16-debian"
     bundlePlanID: "free"
     planID: "small-g2"
     port: 6001

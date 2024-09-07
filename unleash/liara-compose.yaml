@@ -1,7 +1,7 @@
 apps:
   - id: "unleash"
     name: "Unleash"
-    image: "unleashorg/unleash-server:5"
+    image: "registry.c2.liara.ir/one-click-apps/unleashorg/unleash-server:5"
     bundlePlanID: "standard"
     planID: "small-g2"
     port: 4242

@@ -1,7 +1,7 @@
 apps:
   - id: "mattermost"
     name: "Mattermost"
-    image: "mattermost/mattermost-team-edition:9.7.2"
+    image: "registry.c2.liara.ir/one-click-apps/mattermost/mattermost-team-edition:9.7.2"
     bundlePlanID: "pro"
     planID: "small-g2"
     disks:

@@ -1,7 +1,7 @@
 apps:
   - id: "wordpress"
     name: "WordPress"
-    image: "liararepo/wordpress-one-click-app:6-php7.4"
+    image: "registry.c2.liara.ir/one-click-apps/liararepo/wordpress-one-click-app:6-php7.4"
     availableImageTags:
       - "6-php7.4"
       - "6-php8.0"

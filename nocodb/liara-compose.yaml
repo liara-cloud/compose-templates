@@ -1,7 +1,7 @@
 apps:
   - id: "nocodb"
     name: "NocoDB"
-    image: "nocodb/nocodb:0.205.1"
+    image: "registry.c2.liara.ir/one-click-apps/nocodb/nocodb:0.205.1"
     bundlePlanID: "standard"
     planID: "small-g2"
     port: 8080

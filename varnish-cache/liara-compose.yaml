@@ -1,7 +1,7 @@
 apps:
   - id: "varnish"
     name: "Varnish"
-    image: "varnish:7.5.0"
+    image: "registry.c2.liara.ir/one-click-apps/varnish:7.5.0"
     bundlePlanID: "standard"
     planID: "small-g2"
     port: 80

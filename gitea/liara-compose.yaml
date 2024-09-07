@@ -1,7 +1,7 @@
 apps:
   - id: "gitea"
     name: "Gitea"
-    image: "gitea/gitea:1.21.1-rootless"
+    image: "registry.c2.liara.ir/one-click-apps/gitea/gitea:1.21.1-rootless"
     bundlePlanID: "standard"
     planID: "small-g2"
     port: 3000

@@ -1,7 +1,7 @@
 apps:
   - id: "code-server"
     name: "Code Server"
-    image: "codercom/code-server:4.23.1"
+    image: "registry.c2.liara.ir/one-click-apps/codercom/code-server:4.23.1"
     bundlePlanID: "standard"
     planID: "small-g2"
     port: 8080
