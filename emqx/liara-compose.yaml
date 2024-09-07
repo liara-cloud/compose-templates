@@ -1,0 +1,19 @@
+apps:
+  - id: emqx
+    name: EMQX
+    image: registry.c2.liara.ir/one-click-apps/emqx:5.7.2
+    bundlePlanID: standard
+    planID: medium-g2
+    port: 18083
+    disks:
+      - name: data
+        mountTo: /opt/emqx/data
+        size: 10
+        maxSize: 5
+      - name: log
+        mountTo: /opt/emqx/log
+        size: 10
+        maxSize: 1
+    envs:
+      EMQX_DASHBOARD__DEFAULT_USERNAME: root
+      EMQX_DASHBOARD__DEFAULT_PASSWORD: $RANDOM_STRING

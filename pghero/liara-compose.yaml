@@ -1,0 +1,18 @@
+apps:
+  - id: pghero
+    name: PgHero
+    image: registry.c2.liara.ir/one-click-apps/pghero:v3.6.0
+    bundlePlanID: standard
+    planID: small-g2
+    port: 8080
+    envs:
+      DATABASE_URL: >-
+        postgres://$DB_main_USER:$DB_main_PASSWORD@$DB_main_HOST:$DB_main_PORT/postgres
+      PGHERO_USERNAME: pghero
+      PGHERO_PASSWORD: $RANDOM_STRING
+databases:
+  - type: postgres
+    id: main
+    version: '15.4'
+    bundlePlanID: standard
+    planID: small-g2

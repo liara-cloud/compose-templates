@@ -1,0 +1,26 @@
+apps:
+  - id: flowiseai
+    name: FlowiseAI
+    image: registry.c2.liara.ir/one-click-apps/flowise:2.0.7
+    bundlePlanID: standard
+    planID: small-g2
+    disks:
+      - name: flowise
+        mountTo: /root/.flowise
+        size: 10
+        maxSize: 5
+    port: 3000
+    envs:
+      PORT: '3000'
+      DATABASE_PATH: /root/.flowise
+      APIKEY_PATH: /root/.flowise
+      SECRETKEY_PATH: /root/.flowise
+      LOG_PATH: /root/.flowise/logs
+      BLOB_STORAGE_PATH: /root/.flowise/storage
+      FLOWISE_USERNAME: flowise
+      FLOWISE_PASSWORD: $RANDOM_STRING
+      CORS_ORIGINS: '*'
+      FLOWISE_FILE_SIZE_LIMIT: 50mb
+      DEBUG: 'true'
+      LOG_LEVEL: debug
+      DISABLE_FLOWISE_TELEMETRY: 'true'

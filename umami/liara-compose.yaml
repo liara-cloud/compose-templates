@@ -1,0 +1,19 @@
+apps:
+  - id: umami
+    name: Umami
+    image: registry.c2.liara.ir/one-click-apps/umami:postgresql-v2.13.2
+    bundlePlanID: standard
+    planID: small-g2
+    port: 3000
+    envs:
+      DATABASE_URL: >-
+        postgresql://$DB_main_USER:$DB_main_PASSWORD@$DB_main_HOST:$DB_main_PORT/postgres
+      DATABASE_TYPE: postgresql
+      APP_SECRET: $RANDOM_STRING
+      FORCE_SSL: '1'
+databases:
+  - type: postgres
+    id: main
+    version: '16.1'
+    bundlePlanID: standard
+    planID: small-g2
