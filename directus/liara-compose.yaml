@@ -1,0 +1,29 @@
+apps:
+  - id: directus
+    name: Directus
+    image: directus/directus:11.1.0
+    bundlePlanID: standard
+    planID: small-g2
+    disks:
+      - name: database
+        mountTo: /directus/database
+        size: 10
+        maxSize: 2
+      - name: uploads
+        mountTo: /directus/uploads
+        size: 10
+        maxSize: 5
+      - name: extensions
+        mountTo: /directus/extensions
+        size: 10
+        maxSize: 3
+    port: 8055
+    envs:
+      SECRET: "$RANDOM_STRING"
+      ADMIN_EMAIL: "admin@example.com"
+      ADMIN_PASSWORD: "$RANDOM_STRING"
+      DB_CLIENT: "sqlite3"
+      DB_FILENAME: "/directus/database/data.db"
+      WEBSOCKETS_ENABLED: "false"
+      WEBSOCKETS_GRAPHQL_ENABLED: "false"
+      WEBSOCKETS_REST_ENABLED: "false"

@@ -1,0 +1,17 @@
+apps:
+  - id: onedev
+    name: Onedev
+    image: registry.c2.liara.ir/one-click-apps/1dev-server:11.1.1
+    bundlePlanID: standard
+    planID: medium-g2
+    disks:
+      - name: data
+        mountTo: /opt/onedev
+        size: 10
+        maxSize: 5
+    port: 6610
+    envs:
+      initial_user: root
+      initial_password: $RANDOM_STRING
+      initial_email: root@example.com
+      initial_server_url: https://$APP_NAME.liara.run
