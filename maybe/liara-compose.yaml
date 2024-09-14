@@ -1,0 +1,30 @@
+apps:
+  - id: maybe
+    name: Maybe
+    image: ghcr.io/maybe-finance/maybe:0.1.0-alpha.17
+    bundlePlanID: standard
+    planID: small-g2
+    disks:
+      - name: storage
+        mountTo: /rails/storage
+        size: 10
+        maxSize: 5
+    port: 3000
+    envs:
+      WORDPRESS_DB_HOST: $DB_main_HOST:$DB_main_PORT
+      SELF_HOSTING_ENABLED: 'true'
+      RAILS_FORCE_SSL: 'false'
+      RAILS_ASSUME_SSL: 'false'
+      GOOD_JOB_EXECUTION_MODE: async
+      SECRET_KEY_BASE: $RANDOM_STRING
+      DB_HOST: $DB_main_HOST
+      DB_PORT: $DB_main_PORT
+      POSTGRES_DB: postgres
+      POSTGRES_USER: $DB_main_USER
+      POSTGRES_PASSWORD: $DB_main_PASSWORD
+databases:
+  - type: postgres
+    id: main
+    version: '15.4'
+    bundlePlanID: standard
+    planID: small-g2

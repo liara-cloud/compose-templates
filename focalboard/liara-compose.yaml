@@ -1,0 +1,14 @@
+apps:
+  - id: focalboard
+    name: Focalboard
+    image: mattermost/focalboard:7.8.9
+    bundlePlanID: standard
+    planID: small-g2  
+    disks:
+      - name: data
+        mountTo: /opt/focalboard/data
+        size: 10
+        maxSize: 0.5
+
+    port: 8000
+    
