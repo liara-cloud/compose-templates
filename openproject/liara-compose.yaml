@@ -1,0 +1,23 @@
+apps:
+  - id: openproject
+    name: OpenProject
+    image: openproject/openproject:14
+    bundlePlanID: standard
+    planID: standard-plus-g2
+    port: 8080
+  
+    disks:
+      - name: pg-data
+        mountTo: /var/openproject/pgdata
+        size: 10
+        maxSize: 0.5
+      - name: assets
+        mountTo: /var/openproject/assets
+        size: 10
+        maxSize: 0.5
+        
+    envs:
+      OPENPROJECT_SECRET_KEY_BASE: "$RANDOM_STRING"
+      OPENPROJECT_HOST__NAME: "$APP_NAME.liara.run"
+      OPENPROJECT_HTTPS: "true"
+      OPENPROJECT_DEFAULT__LANGUAGE: "en"

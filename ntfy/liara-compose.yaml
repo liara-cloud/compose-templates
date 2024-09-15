@@ -1,0 +1,25 @@
+apps:
+  - id: ntfy
+    name: ntfy
+    image: binwiederhier/ntfy:v2.11.0
+    bundlePlanID: standard
+    planID: small-g2
+    port: 80
+    args:
+      - "serve"
+  
+    disks:
+      - name: cache
+        mountTo: /var/cache/ntfy
+        size: 10
+        maxSize: 0.5
+      - name: data
+        mountTo: /etc/ntfy
+        size: 10
+        maxSize: 0.5
+        
+    envs:
+      TZ: "UTC"
+      NTFY_BASE_URL: "https://$APP_NAME.liara.run"
+      NTFY_AUTH_DEFAULT_ACCESS: "deny-all"
+      NTFY_BEHIND_PROXY: "true"

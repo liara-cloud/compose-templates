@@ -1,0 +1,64 @@
+apps:
+  - id: paperless
+    name: paperless
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.12
+    bundlePlanID: standard
+    planID: medium-g2
+
+    disks:
+      - name: data
+        mountTo: /usr/src/paperless/data
+        size: 10
+        maxSize: 0.5
+      - name: media
+        mountTo: /usr/src/paperless/media
+        size: 10
+        maxSize: 0.5
+      - name: export
+        mountTo: /usr/src/paperless/export
+        size: 10
+        maxSize: 0.5
+      - name: consume
+        mountTo: /usr/src/paperless/consume
+        size: 10
+        maxSize: 0.5
+  
+    port: 8000
+    envs:
+
+      PAPERLESS_URL: "https://$APP_NAME.liara.run"
+      PAPERLESS_SECRET_KEY: "$RANDOM_STRING"
+      PAPERLESS_TIME_ZONE: "Asia/Tehran"
+      PAPERLESS_REDIS: "redis://:$DB_base_PASSWORD@$DB_base_HOST:$DB_base_PORT/0"
+      PAPERLESS_DBENGINE: "postgresql"
+      PAPERLESS_DBHOST: "$DB_main_HOST"
+      PAPERLESS_DBPORT: "$DB_main_PORT"
+      PAPERLESS_DBNAME: "postgres"
+      PAPERLESS_DBUSER: "$DB_main_USER"
+      PAPERLESS_DBPASS: "$DB_main_PASSWORD"
+      PAPERLESS_ADMIN_USER: "paperless"
+      PAPERLESS_ADMIN_MAIL: "admin@example.com"
+      PAPERLESS_ADMIN_PASSWORD: "$RANDOM_STRING"
+      PAPERLESS_OCR_LANGUAGES: "eng fas"
+      PAPERLESS_OCR_LANGUAGE: "eng"
+      PAPERLESS_APP_TITLE: "Paperless-ngx"
+      PAPERLESS_EMAIL_HOST: "smtp.c1.liara.email"
+      PAPERLESS_EMAIL_PORT: "587"
+      PAPERLESS_EMAIL_HOST_USER: "replace-me"
+      PAPERLESS_EMAIL_FROM: "replace@m.e"
+      PAPERLESS_EMAIL_HOST_PASSWORD: "replace-me"
+      PAPERLESS_EMAIL_USE_TLS: "true"
+
+databases:
+  - type: postgres
+    id: main
+    version: '15.4'
+    bundlePlanID: standard
+    planID: small-g2
+
+  - type: redis
+    id: base
+    version: '7.2.3'
+    bundlePlanID: standard
+    planID: small-g2
+  

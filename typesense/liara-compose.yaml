@@ -1,0 +1,18 @@
+apps:
+  - id: typesense
+    name: typesense
+    image: typesense/typesense:27.0
+    bundlePlanID: standard
+    planID: standard-base-g2
+    port: 8108
+  
+    disks:
+      - name: typesense-data
+        mountTo: /data
+
+    envs:
+      TYPESENSE_API_KEY: "$RANDOM_STRING"
+      TYPESENSE_DATA_DIR: "/data"
+      TYPESENSE_ENABLE_CORS: "true"
+      TYPESENSE_PEERING_PORT: "8107"
+      
