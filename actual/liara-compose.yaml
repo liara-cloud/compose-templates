@@ -1,0 +1,18 @@
+apps:
+  - id: actual
+    name: Actual
+    image: actualbudget/actual-server:sha-fe85325
+    bundlePlanID: standard
+    planID: small-g2
+    port: 80
+
+    disks:
+      - name: data
+        mountTo: /data
+        size: 10
+        maxSize: 0.5  
+
+    envs:
+      ACTUAL_PORT: "80"
+      ACTUAL_LOGIN_METHOD: "password"
+

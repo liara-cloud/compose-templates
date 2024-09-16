@@ -1,0 +1,33 @@
+apps:
+  - id: keila
+    name: Keila
+    image: pentacent/keila:0.15
+    bundlePlanID: standard
+    planID: small-g2
+    port: 4000
+  
+
+    envs:
+      DB_URL: "postgres://$DB_main_USER:$DB_main_PASSWORD@$DB_main_HOST:$DB_main_PORT/postgres"
+      KEILA_USER: "admin@example.com"
+      KEILA_PASSWORD: "$RANDOM_STRING" 
+      URL_HOST: "$APP_NAME.liara.run"
+      URL_SCHEMA: "https"
+      PORT: "4000"
+      SECRET_KEY_BASE: "d3d986ae0dca09cb98e9694d3bd8d57d67027$RANDOM_STRINGf771e057c31df35f52ea1ee1fc7e8b816ac64767fc50eb2c7ab60b4a1a1695e12e652b2f84d57b17b8c1017311a"
+
+      MAILER_TYPE: "smtp"
+      MAILER_SMTP_HOST: "smtp.c1.liara.email"
+      MAILER_SMTP_PORT: "587"
+      MAILER_SMTP_USER: "replace-me"
+      MAILER_SMTP_PASSWORD: "replace-me"
+      MAILER_SMTP_FROM_EMAIL: "replace@m.e"
+      MAILER_ENABLE_STARTTLS: "true"
+
+
+databases:
+  - type: postgres
+    id: main
+    version: '15.4'
+    bundlePlanID: standard
+    planID: small-g2

@@ -1,0 +1,18 @@
+apps:
+  - id: grist
+    name: Grist
+    image: gristlabs/grist-oss:1.1.18
+    bundlePlanID: standard
+    planID: small-g2
+    port: 8484
+
+    disks:
+      - name: data
+        mountTo: /persist
+        size: 10
+        maxSize: 0.5
+
+    envs:
+      GRIST_SESSION_SECRET: "$RANDOM_STRING"
+      GRIST_SANDBOX_FLAVOR: "gvisor"
+      APP_HOME_URL: "https://$APP_NAME.liara.run"
