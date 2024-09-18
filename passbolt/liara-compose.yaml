@@ -1,0 +1,47 @@
+apps:
+  - id: passbolt
+    name: PassBolt
+    image: passbolt/passbolt:4.9.1-1-ce
+    bundlePlanID: standard
+    planID: small-g2
+    port: 80
+    args: 
+      - "/docker-entrypoint.sh"
+
+    disks:
+      - name: gpg
+        mountTo: /etc/passbolt/gpg
+        size: 10
+        maxSize: 0.5
+      - name: jwt
+        mountTo: /etc/passbolt/jwt
+        size: 10
+        maxSize: 0.5
+
+    envs:
+
+      APP_FULL_BASE_URL: "https://$APP_NAME.liara.run"
+      DATASOURCES_DEFAULT_HOST: "$DB_main_HOST"
+      DATASOURCES_DEFAULT_PORT: "$DB_main_PORT"
+      DATASOURCES_DEFAULT_USERNAME: "$DB_main_USER"
+      DATASOURCES_DEFAULT_PASSWORD: "$DB_main_PASSWORD"
+      DATASOURCES_DEFAULT_DATABASE: "$DB_main_NAME"
+      DEBUG: "true"
+
+      EMAIL_TRANSPORT_DEFAULT_CLASS_NAME: "Smtp"
+      EMAIL_DEFAULT_FROM_NAME: "PassBolt"
+      EMAIL_DEFAULT_FROM: "replace@m.e"
+      EMAIL_TRANSPORT_DEFAULT_HOST: "smtp.c1.liara.email"
+      EMAIL_TRANSPORT_DEFAULT_PORT: "587"
+      EMAIL_TRANSPORT_DEFAULT_USERNAME: "replace-me"
+      EMAIL_TRANSPORT_DEFAULT_PASSWORD: "replace-me"
+      
+      PASSBOLT_JS_BUILD: "production"
+      PASSBOLT_PLUGINS_PASSWORD_GENERATOR_DEFAULT_GENERATOR: "password"
+
+databases:
+  - type: "mariadb"
+    id: "main"
+    version: "10.6.8"
+    bundlePlanID: "standard"
+    planID: "small-g2"
