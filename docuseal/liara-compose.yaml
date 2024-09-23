@@ -1,0 +1,13 @@
+apps:
+  - id: docuseal
+    name: docuseal
+    image: docuseal/docuseal:1.7.2
+    bundlePlanID: standard
+    planID: small-g2
+    port: 3000
+
+    disks:
+      - name: data
+        mountTo: /data
+        size: 10
+        maxSize: 1

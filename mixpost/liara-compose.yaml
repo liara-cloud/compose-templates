@@ -1,0 +1,47 @@
+apps:
+  - id: mixpost
+    name: mixpost
+    image: inovector/mixpost:v1.7.2
+    bundlePlanID: standard
+    planID: small-g2
+    port: 80
+
+    disks:
+      - name: storage
+        mountTo: /var/www/html/storage/app
+        size: 10
+        maxSize: 0.5
+      - name: logs
+        mountTo: /var/www/html/storage/logs
+        size: 10
+        maxSize: 0.5
+
+    envs:
+      APP_NAME: "Mixpost"
+      APP_KEY: "base64:YIfKh8T8itKnnT1vnGntzXyxLXFj0Pp6k+TPKkzZXRc="
+      APP_DEBUG: "true"
+      APP_DOMAIN: "$APP_NAME.liara.run"
+      APP_URL: "https://$APP_NAME.liara.run"
+      
+      DB_HOST: "$DB_main_HOST"
+      DB_PORT: "$DB_main_PORT"
+      DB_DATABASE: "$DB_main_NAME"
+      DB_USERNAME: "$DB_main_USER"
+      DB_PASSWORD: "$DB_main_PASSWORD"
+
+      REDIS_HOST: "$DB_base_HOST"
+      REDIS_PORT: "$DB_base_PORT"
+      REDIS_PASSWORD: "$DB_base_PASSWORD"
+
+   
+databases:
+  - type: mariadb
+    id: main
+    version: 10.6.8
+    bundlePlanID: standard
+    planID: small-g2
+  - type: redis
+    id: base
+    version: 7.2.3
+    bundlePlanID: standard
+    planID: small-g2
