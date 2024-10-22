@@ -1,0 +1,24 @@
+apps:
+  - id: rallly
+    name: rallly
+    image: registry.c2.liara.ir/one-click-apps/rallly:3
+    bundlePlanID: standard
+    planID: small-g2
+    port: 3000
+    envs:
+      DATABASE_URL: >-
+        postgres://$DB_main_USER:$DB_main_PASSWORD@$DB_main_HOST:$DB_main_PORT/postgres
+      SECRET_PASSWORD: Akoz2uz0Nl8J0GB931xI4DJ9lrK9AFJ06I7wQJ/MVzg=
+      NEXT_PUBLIC_BASE_URL: https://$APP_NAME.liara.run
+      SUPPORT_EMAIL: admin@example.com
+      SMTP_HOST: smtp.c1.liara.email
+      SMTP_PORT: '587'
+      SMTP_SECURE: 'false'
+      SMTP_USER: replace-me
+      SMTP_PWD: replace-me
+databases:
+  - type: postgres
+    id: main
+    version: '15.4'
+    bundlePlanID: standard
+    planID: small-g2

@@ -1,0 +1,29 @@
+apps:
+  - id: vvveb
+    name: vvveb
+    image: registry.c2.liara.ir/one-click-apps/vvvebcms:php8.3-apache
+    bundlePlanID: standard
+    planID: small-g2
+    port: 80
+    disks:
+      - name: data
+        mountTo: /var/www/html
+        size: 10
+        maxSize: 1
+      - name: database
+        mountTo: /var/lib/mysql
+        size: 10
+        maxSize: 1
+    envs:
+      DB_HOST: $DB_main_HOST
+      DB_DATABASE: $DB_main_NAME
+      DB_USER: $DB_main_USER
+      DB_PASSWORD: $DB_main_PASSWORD
+      DB_ENGINE: mysqli
+      DB_PORT: $DB_main_PORT
+databases:
+  - type: mariadb
+    id: main
+    version: 10.6.8
+    bundlePlanID: standard
+    planID: small-g2
