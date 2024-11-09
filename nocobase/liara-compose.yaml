@@ -1,0 +1,39 @@
+apps:
+  - id: nocobase
+    name: nocobase
+    image: nocobase/nocobase:1.3.42-beta
+    bundlePlanID: standard
+    planID: small-g2
+    port: 13000
+
+    disks:
+      - name: storage
+        mountTo: /app/nocobase/storage
+        size: 50
+        maxSize: 5
+
+    envs:
+      APP_KEY: "$RANDOM_STRING"
+      DB_DIALECT: "mariadb"
+      DB_HOST: "$DB_main_HOST"
+      DB_DATABASE: "$DB_main_NAME"
+      DB_USER: "$DB_main_USER"
+      DB_PORT: "$DB_main_PORT"
+      DB_PASSWORD: "$DB_main_PASSWORD"
+      DB_UNDERSCORED: "true"
+      TZ: "Asia/Shanghai"
+      APP_ENV: "production"
+      APP_PORT: "13000"
+      DB_LOGGING: "on"
+      INIT_APP_LANG: "en"
+      INIT_ROOT_EMAIL: "admin@example.com"
+      INIT_ROOT_PASSWORD: "$RANDOM_STRING"
+
+
+
+databases:
+  - type: mariadb
+    id: main
+    version: 11.2.3
+    bundlePlanID: standard
+    planID: small-g2

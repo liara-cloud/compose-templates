@@ -1,0 +1,94 @@
+apps:
+  - id: discourse
+    name: discourse
+    image: bitnami/discourse:3
+    bundlePlanID: standard
+    planID: pro-g2
+    port: 3000
+
+    disks:
+      - name: data
+        mountTo: /bitnami/discourse
+        size: 50
+        maxSize: 40
+
+    envs: 
+      DISCOURSE_HOST: "$APP_NAME.liara.run"
+      DISCOURSE_ENABLE_HTTPS: "yes"
+      DISCOURSE_PORT_NUMBER: "3000"
+      DISCOURSE_EXTERNAL_HTTP_PORT_NUMBER: "3000"
+      DISCOURSE_USERNAME: "admin"
+      DISCOURSE_PASSWORD: "$RANDOM_STRING"
+
+      DISCOURSE_DATABASE_HOST: "$DB_main_HOST"
+      DISCOURSE_DATABASE_PORT_NUMBER: "$DB_main_PORT"
+      DISCOURSE_DATABASE_USER: "$DB_main_USER"
+      DISCOURSE_DATABASE_NAME: "postgres"
+      DISCOURSE_DATABASE_PASSWORD: "$DB_main_PASSWORD"
+
+      DISCOURSE_REDIS_HOST: "$DB_base_HOST"
+      DISCOURSE_REDIS_PORT_NUMBER: "$DB_base_PORT"
+      DISCOURSE_REDIS_PASSWORD: "$DB_base_PASSWORD"
+
+      DISCOURSE_EMAIL: "user@example.com"
+      DISCOURSE_SMTP_HOST: ""
+      DISCOURSE_SMTP_PORT_NUMBER: ""
+      DISCOURSE_SMTP_USER: ""
+      DISCOURSE_SMTP_PASSWORD: ""
+      DISCOURSE_SMTP_PROTOCOL: ""
+
+
+  - id: sidekiq
+    name: sidekiq
+    image: bitnami/discourse:3
+    bundlePlanID: standard
+    planID: medium-g2
+    port: 3000
+
+    args:
+      - "/opt/bitnami/scripts/discourse-sidekiq/run.sh"
+
+    disks:
+      - name: data
+        mountTo: /bitnami/discourse
+        size: 50
+        maxSize: 40
+
+    envs: 
+      DISCOURSE_HOST: "$APP_discourse_NAME.liara.run"
+      DISCOURSE_ENABLE_HTTPS: "yes"
+      DISCOURSE_PORT_NUMBER: "3000"
+      DISCOURSE_EXTERNAL_HTTP_PORT_NUMBER: "3000"
+      DISCOURSE_USERNAME: "admin"
+      DISCOURSE_PASSWORD: "$RANDOM_STRING"
+
+      DISCOURSE_DATABASE_HOST: "$DB_main_HOST"
+      DISCOURSE_DATABASE_PORT_NUMBER: "$DB_main_PORT"
+      DISCOURSE_DATABASE_USER: "$DB_main_USER"
+      DISCOURSE_DATABASE_NAME: "postgres"
+      DISCOURSE_DATABASE_PASSWORD: "$DB_main_PASSWORD"
+
+      DISCOURSE_REDIS_HOST: "$DB_base_HOST"
+      DISCOURSE_REDIS_PORT_NUMBER: "$DB_base_PORT"
+      DISCOURSE_REDIS_PASSWORD: "$DB_base_PASSWORD"
+
+      DISCOURSE_EMAIL: "user@example.com"
+      DISCOURSE_SMTP_HOST: ""
+      DISCOURSE_SMTP_PORT_NUMBER: ""
+      DISCOURSE_SMTP_USER: ""
+      DISCOURSE_SMTP_PASSWORD: ""
+      DISCOURSE_SMTP_PROTOCOL: ""
+
+
+databases:
+  - type: postgres
+    id: main
+    version: '15.4'
+    bundlePlanID: standard
+    planID: small-g2
+
+  - type: redis
+    id: base
+    version: 7.2.3
+    bundlePlanID: standard
+    planID: small-g2

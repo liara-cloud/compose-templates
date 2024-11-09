@@ -1,0 +1,34 @@
+apps:
+  - id: wiki
+    name: wiki
+    image: ghcr.io/requarks/wiki:2.5.305
+    bundlePlanID: standard
+    planID: small-g2
+    port: 3000
+
+    disks:
+      - name: content
+        mountTo: /wiki/data/content
+        size: 50
+        maxSize: 5
+
+    envs:
+      
+      DB_TYPE: "mariadb"
+      DB_HOST: "$DB_main_HOST"
+      DB_PORT: "$DB_main_PORT"
+      DB_USER: "$DB_main_USER"
+      DB_PASS: "$DB_main_PASSWORD"
+      DB_NAME: "$DB_main_NAME"
+
+      SSL_ACTIVE: "true"
+      LETSENCRYPT_DOMAIN: "$APP_NAME.liara.run"
+      LETSENCRYPT_EMAIL: "replace@me.me"
+
+
+databases:
+  - type: mariadb
+    id: main
+    version: 10.6.8
+    bundlePlanID: standard
+    planID: small-g2

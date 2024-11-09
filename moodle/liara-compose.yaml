@@ -1,0 +1,46 @@
+apps:
+  - id: moodleapp
+    name: moodleapp
+    image: bitnami/moodle:4.4.4
+    bundlePlanID: standard
+    planID: medium-g2
+    disks:
+      - name: moodle
+        mountTo: /bitnami/moodle
+        size: 50
+        maxSize: 5
+      - name: data
+        mountTo: /bitnami/moodledata
+        size: 50
+        maxSize: 5
+
+    port: 8080
+    envs:
+      MOODLE_DATABASE_TYPE: "mariadb"
+      MOODLE_DATABASE_HOST: "$DB_main_HOST"
+      MOODLE_DATABASE_PORT_NUMBER: "$DB_main_PORT"
+      MOODLE_DATABASE_USER: "$DB_main_USER"
+      MOODLE_DATABASE_NAME: "$DB_main_NAME"
+      MOODLE_DATABASE_PASSWORD: "$DB_main_PASSWORD"
+      
+      MOODLE_SITE_NAME: "Moodle"
+      MOODLE_SSLPROXY: "yes"
+      MOODLE_LANG: "en"
+      MOODLE_USERNAME: "admin"
+      MOODLE_PASSWORD: "$RANDOM_STRING"
+
+      MOODLE_EMAIL: "admin@example.com"
+
+      MOODLE_SMTP_HOST: ""
+      MOODLE_SMTP_PORT_NUMBER: ""
+      MOODLE_SMTP_USER: ""
+      MOODLE_SMTP_PASSWORD: ""
+      MOODLE_SMTP_PROTOCOL: ""
+
+
+databases:
+  - type: mariadb
+    id: main
+    version: 10.6.8
+    bundlePlanID: standard
+    planID: small-g2
