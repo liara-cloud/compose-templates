@@ -1,0 +1,55 @@
+apps:
+
+  - id: db-migration
+    name: infisical-db-migration
+    image: infisical/infisical:v0.94.1-postgres
+    bundlePlanID: standard
+    planID: standard-base-g2
+    port: 8080
+    args:
+      - "bash"
+      - "-c"
+      - "npm run migration:latest"
+
+    envs:
+      NODE_ENV: "production"
+      POSTGRES_PASSWORD: "$DB_main_PASSWORD"
+      POSTGRES_USER: "$DB_main_USER"
+      POSTGRES_DB: "postgres"
+      DB_CONNECTION_URI: "postgresql://$DB_main_USER:$DB_main_PASSWORD@$DB_main_HOST:$DB_main_PORT/postgres"
+      ENCRYPTION_KEY: "d7947e700b156615c98a6c8a70dc65a3"
+      AUTH_SECRET: "32aPbqtEB7NCboa4XgyuSBIK3wdw27bmITfJA8xH4WewE="
+      REDIS_URL: "redis://:$DB_base_PASSWORD@$DB_base_HOST:$DB_base_PORT/0"
+      SITE_URL: "https://$APP_NAME.liara.run"
+      PORT: "8080"
+
+  - id: infisical
+    name: infisical
+    image: infisical/infisical:v0.94.1-postgres
+    bundlePlanID: standard
+    planID: standard-base-g2
+    port: 8080
+
+    envs:
+      NODE_ENV: "production"
+      POSTGRES_PASSWORD: "$DB_main_PASSWORD"
+      POSTGRES_USER: "$DB_main_USER"
+      POSTGRES_DB: "postgres"
+      DB_CONNECTION_URI: "postgresql://$DB_main_USER:$DB_main_PASSWORD@$DB_main_HOST:$DB_main_PORT/postgres"
+      ENCRYPTION_KEY: "d7947e700b156615c98a6c8a70dc65a3"
+      AUTH_SECRET: "32aPbqtEB7NCboa4XgyuSBIK3wdw27bmITfJA8xH4WewE="
+      REDIS_URL: "redis://:$DB_base_PASSWORD@$DB_base_HOST:$DB_base_PORT/0"
+      SITE_URL: "https://$APP_NAME.liara.run"
+      PORT: "8080"
+
+databases:
+  - type: postgres
+    id: main
+    version: '14.9'
+    bundlePlanID: standard
+    planID: small-g2
+  - type: redis
+    id: base
+    version: 7.2.3
+    bundlePlanID: standard
+    planID: small-g2

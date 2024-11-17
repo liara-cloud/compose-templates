@@ -1,0 +1,35 @@
+apps:
+  - id: zitadel
+    name: zitadel
+    image: ghcr.io/zitadel/zitadel:v2.64.1
+    bundlePlanID: standard
+    planID: standard-base-g2
+    port: 8080
+    
+    args: 
+      - start-from-init
+      - '--masterkeyFromEnv'
+
+    envs:
+      ZITADEL_DATABASE_POSTGRES_HOST: "$DB_main_HOST"
+      ZITADEL_DATABASE_POSTGRES_PORT: "$DB_main_PORT"
+      ZITADEL_DATABASE_POSTGRES_DATABASE: "postgres"
+      ZITADEL_DATABASE_POSTGRES_USER_USERNAME: "$DB_main_USER"
+      ZITADEL_DATABASE_POSTGRES_USER_PASSWORD: "$DB_main_PASSWORD"
+      ZITADEL_DATABASE_POSTGRES_USER_SSL_MODE: "disable"
+      ZITADEL_DATABASE_POSTGRES_ADMIN_USERNAME: "$DB_main_USER"
+      ZITADEL_DATABASE_POSTGRES_ADMIN_PASSWORD: "$DB_main_PASSWORD"
+      ZITADEL_DATABASE_POSTGRES_ADMIN_SSL_MODE: "disable"
+      ZITADEL_EXTERNALSECURE: "true"
+      ZITADEL_MASTERKEY: "psnXEX6z0XvnWK3wBxo3nkCglObr46Az"
+      ZITADEL_PORT: "8080"
+      ZITADEL_EXTERNALPORT: "8080"
+      ZITADEL_EXTERNALDOMAIN: "$APP_NAME.liara.run"
+      ZITADEL_TLS_ENABLED: "false"
+
+databases:
+  - type: postgres
+    id: main
+    version: '16.3'
+    bundlePlanID: standard
+    planID: small-g2

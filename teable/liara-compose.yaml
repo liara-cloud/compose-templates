@@ -1,0 +1,45 @@
+apps:
+
+  - id: db-migrate
+    name: teable-db-migrate
+    image: ghcr.io/teableio/teable-db-migrate:sha-501f35cd4429effa433bff3886aef0450ae5c8bc
+    bundlePlanID: standard
+    planID: small-g2
+    port: 3000
+
+    envs:
+
+      TZ: "UTC"
+      PRISMA_DATABASE_URL: "postgresql://$DB_main_USER:$DB_main_PASSWORD@$DB_main_HOST:$DB_main_PORT/postgres"
+
+  - id: teable
+    name: teable
+    image: ghcr.io/teableio/teable:sha-501f35cd4429effa433bff3886aef0450ae5c8bc
+    bundlePlanID: standard
+    planID: small-g2
+    port: 3000
+    
+    disks:
+      - name: data
+        mountTo: /app/.assets
+        size: 10
+        maxSize: 0.5
+
+    envs:
+
+      TZ: "UTC"
+      NEXT_ENV_IMAGES_ALL_REMOTE: "true"
+      POSTGRES_HOST: "$DB_main_HOST"
+      POSTGRES_PORT: "$DB_main_PORT"
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: "$DB_main_USER"
+      POSTGRES_PASSWORD: "$DB_main_PASSWORD"
+      PUBLIC_ORIGIN: "httpS://$APP_NAME.liara.run"
+      PRISMA_DATABASE_URL: "postgresql://$DB_main_USER:$DB_main_PASSWORD@$DB_main_HOST:$DB_main_PORT/postgres"
+
+databases:
+  - type: postgres
+    id: main
+    version: '15.4'
+    bundlePlanID: standard
+    planID: small-g2
