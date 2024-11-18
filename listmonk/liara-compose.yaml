@@ -1,0 +1,41 @@
+apps:
+  - id: listmonk
+    name: listmonk
+    image: listmonk/listmonk:v4.1.0
+    bundlePlanID: standard
+    planID: small-g2
+    port: 9000
+
+    disks:
+      - name: "uploads"
+        mountTo: "/listmonk/uploads"
+        size: 50
+        maxSize: 5
+    
+    envs:
+      LISTMONK_app__address: "0.0.0.0:9000"
+      LISTMONK_db__user: "$DB_main_USER"
+      LISTMONK_db__password: "$DB_main_PASSWORD"
+      LISTMONK_db__database: "postgres"
+      LISTMONK_db__host: "$DB_main_HOST"
+      LISTMONK_db__port: "$DB_main_PORT"
+      LISTMONK_db__ssl_mode: "disable"
+      LISTMONK_db__max_open: "25"
+      LISTMONK_db__max_idle: "25"
+      LISTMONK_db__max_lifetime: "300s"
+      TZ: "Etc/UTC"
+
+      LISTMONK_ADMIN_USER: "admin"
+      LISTMONK_ADMIN_PASSWORD: "$RANDOM_STRING"
+
+    args: 
+      - "sh"
+      - "-c"
+      - "./listmonk --install --idempotent --yes --config '' && ./listmonk --upgrade --yes --config '' && ./listmonk --config ''"
+
+databases:
+  - type: postgres
+    id: main
+    version: '15.4'
+    bundlePlanID: standard
+    planID: small-g2
