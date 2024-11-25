@@ -1,0 +1,26 @@
+apps:
+  - id: "drupal"
+    name: "drupal"
+    image: "bitnami/drupal:11.0.7"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    disks:
+      - name: "data"
+        mountTo: "/bitnami/drupal"
+    port: 8080
+    envs:
+      DRUPAL_USERNAME: "admin"
+      DRUPAL_PASSWORD: "$RANDOM_STRING"
+      DRUPAL_EMAIL: "admin@example.com"
+      DRUPAL_DATABASE_HOST: "$DB_main_HOST"
+      DRUPAL_DATABASE_PORT_NUMBER: "$DB_main_PORT"
+      DRUPAL_DATABASE_NAME: "$DB_main_NAME"
+      DRUPAL_DATABASE_USER: "$DB_main_USER"
+      DRUPAL_DATABASE_PASSWORD: "$DB_main_PASSWORD"
+
+databases:
+  - type: "mariadb"
+    id: "main"
+    version: "10.6.8"
+    bundlePlanID: "standard"
+    planID: "small-g2"

@@ -1,0 +1,34 @@
+apps:
+  - id: linkstack
+    name: linkstack
+    image: linkstackorg/linkstack:amd64
+    bundlePlanID: standard
+    planID: small-g2
+    port: 80
+
+    disks:
+      - name: "data"
+        mountTo: "/htdocs"
+        size: 50
+        maxSize: 5
+    
+    envs:
+      TZ: "UTC"
+      SERVER_ADMIN: "admin@example.com"
+      HTTPS_SERVER_NAME: "$APP_NAME.liara.run"
+      LOG_LEVEL: "debug"
+      PHP_MEMORY_LIMIT: "512M"
+      UPLOAD_MAX_FILESIZE: "16M"
+      APP_URL: "https://$APP_NAME.liara.run"
+      DB_CONNECTION: "sqlite"
+
+      MAIL_HOST: ""
+      MAIL_PORT: ""
+      MAIL_USERNAME: ""
+      MAIL_PASSWORD: ""
+      MAIL_ENCRYPTION: ""
+      MAIL_FROM_ADDRESS: ""
+      MAIL_FROM_NAME: ""
+
+      FORCE_HTTPS: "true"
+      
