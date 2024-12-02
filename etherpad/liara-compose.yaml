@@ -1,0 +1,23 @@
+apps:
+  - id: etherpad
+    name: Etherpad
+    image: etherpad/etherpad:2.2.6
+    bundlePlanID: standard
+    planID: small-g2
+    disks:
+      - name: database 
+        mountTo: /var
+        size: 30
+        maxSize: 5
+
+    port: 9001
+    envs:
+      TITLE: "Etherpad"
+      FAVICON: 'favicon.ico'
+      IP: "0.0.0.0"
+      PORT: "9001"
+
+      DB_TYPE: "sqlite"
+      DB_FILENAME: "var/etherpad.sq3"
+
+

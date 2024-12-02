@@ -1,0 +1,31 @@
+apps:
+  - id: docmost
+    name: Docmost
+    image: docmost/docmost:0.5.0
+    bundlePlanID: standard
+    planID: small-g2
+    port: 3000
+    envs:
+      APP_URL: "https://$APP_NAME.liara.run"
+      DATABASE_URL: "postgres://$DB_main_USER:$DB_main_PASSWORD@$DB_main_HOST:$DB_main_PORT/postgres"
+      APP_SECRET: "$RANDOM_STRING"
+      REDIS_URL: "redis://:$DB_base_PASSWORD@$DB_base_HOST:$DB_base_PORT/0"
+
+    disks:
+      - name: storage
+        mountTo: "/app/data/storage"
+        size: 60
+        maxSize: 6
+
+databases:
+  - type: postgres
+    id: main
+    version: '15.4'
+    bundlePlanID: standard
+    planID: small-g2
+
+  - type: redis
+    id: base
+    version: 7.2.3
+    bundlePlanID: standard
+    planID: small-g2

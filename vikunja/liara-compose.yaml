@@ -1,0 +1,29 @@
+apps:
+  - id: vikunja
+    name: Vikunja
+    image: vikunja/vikunja:0.24.5
+    bundlePlanID: standard
+    planID: small-g2
+    port: 3456
+    envs:
+      VIKUNJA_SERVICE_PUBLICURL: "https://$APP_NAME.liara.run"
+      VIKUNJA_DATABASE_HOST: "$DB_main_HOST"
+      VIKUNJA_DATABASE_PASSWORD: "$DB_main_PASSWORD"
+      VIKUNJA_DATABASE_TYPE: "mysql"
+      VIKUNJA_DATABASE_USER: "$DB_main_USER"
+      VIKUNJA_DATABASE_PORT: "$DB_main_PORT"
+      VIKUNJA_DATABASE_DATABASE: "$DB_main_NAME"
+      VIKUNJA_SERVICE_JWTSECRET: "$RANDOM_STRING"
+
+    disks:
+      - name: files
+        mountTo: "/app/vikunja/files"
+        size: 60
+        maxSize: 6
+
+databases:
+  - type: "mariadb"
+    id: "main"
+    version: "10.6.8"
+    bundlePlanID: "standard"
+    planID: "small-g2"
