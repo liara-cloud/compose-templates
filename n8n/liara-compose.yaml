@@ -1,7 +1,11 @@
 apps:
   - id: "n8n"
     name: "n8n"
-    image: "registry.c2.liara.ir/one-click-apps/n8nio/n8n:1.36.4"
+    image: "n8nio/n8n:1.72.1"
+    availableImageTags:
+      - "1.72.1"
+      - "1.36.4"
+
     bundlePlanID: "standard"
     planID: "small-g2"
     port: 5678
@@ -9,6 +13,10 @@ apps:
       - name: "data"
         mountTo: "/home/node/.n8n"
     envs:
+      N8N_HOST: "$APP_NAME.liara.run"
+      N8N_PORT: "5678"
+      N8N_PROTOCOL: "https"
+      NODE_ENV: "production"
       N8N_DIAGNOSTICS_ENABLED: "false"
       N8N_VERSION_NOTIFICATIONS_ENABLED: "false"
       N8N_TEMPLATES_ENABLED: "false"

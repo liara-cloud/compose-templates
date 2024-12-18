@@ -1,11 +1,11 @@
 apps:
   - id: "odoo"
     name: "Odoo"
-    image: "registry.c2.liara.ir/one-click-apps/odoo:17.0"
+    image: "odoo:18"
     bundlePlanID: "standard"
     planID: "medium-g2"
     port: 8069
-    args: ["--proxy-mode"]
+    
     disks:
       - name: "addons"
         mountTo: "/mnt/extra-addons"
@@ -13,6 +13,13 @@ apps:
         maxSize: 0.5
       - name: "data"
         mountTo: "/var/lib/odoo"
+        size: 50
+        maxSize: 5
+      - name: "config"
+        mountTo: "/etc/odoo"
+        size: 10
+        maxSize: 0.5
+
     envs:
       HOST: "$DB_main_HOST"
       PORT: "$DB_main_PORT"

@@ -1,12 +1,19 @@
 apps:
-  - id: "code-server"
-    name: "Code Server"
-    image: "registry.c2.liara.ir/one-click-apps/codercom/code-server:4.23.1"
-    bundlePlanID: "standard"
-    planID: "small-g2"
-    port: 8080
+  - id: code-server
+    name: Code Server
+    image: linuxserver/code-server:4.95.3
+    bundlePlanID: standard
+    planID: small-g2
+    port: 8443
     disks:
-      - name: "project"
-        mountTo: "/home/coder"
+      - name: config
+        mountTo: /config
     envs:
       HOME: "/tmp"
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "Etc/UTC"
+      PASSWORD: "$RANDOM_STRING"
+      SUDO_PASSWORD: "$RANDOM_STRING"
+      PROXY_DOMAIN: "$APP_NAME.liara.run"
+      DEFAULT_WORKSPACE: "/config/workspace"
