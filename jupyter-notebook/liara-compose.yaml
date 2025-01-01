@@ -1,7 +1,12 @@
 apps:
   - id: "jupyter-notebook"
     name: "Jupyter Notebook"
-    image: "registry.c2.liara.ir/one-click-apps/quay.io/jupyter/datascience-notebook:2024-05-27"
+    image: "quay.io/jupyter/datascience-notebook:python-3.12.8"
+
+    availableImageTags:
+      - "python-3.12.8"
+      - "2024-05-27"    
+
     bundlePlanID: "standard"
     planID: "medium-g2"
     port: 8888

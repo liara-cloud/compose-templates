@@ -1,13 +1,26 @@
 apps:
   - id: "metabase"
     name: "Metabase"
-    image: "registry.c2.liara.ir/one-click-apps/liaracloud/metabase-one-click-app:v0.49.7"
+    image: "metabase/metabase:v0.52.3.2"
+    availableImageTags:
+      - "v0.52.3.2"
+      - "v0.49.7"    
+
     bundlePlanID: "standard"
     planID: "medium-g2"
     port: 3000
+
     disks:
       - name: "tmp"
         mountTo: "/tmp"
+        size: 50
+        maxSize: 5
+
+      - name: "plugins"
+        mountTo: "/plugins"
+        size: 20
+        maxSize: 2
+
     envs:
       MB_DB_TYPE: "postgres"
       MB_DB_DBNAME: "postgres"
