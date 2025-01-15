@@ -1,0 +1,55 @@
+apps:
+  - id: activepieces
+    name: activepieces
+    image: ghcr.io/activepieces/activepieces:0.39.2
+    bundlePlanID: standard
+    planID: medium-g2
+
+    disks:
+      - name: cache
+        mountTo: /usr/src/app/cache
+        size: 50
+        maxSize: 5
+
+    port: 80
+
+    envs:
+
+      AP_ENGINE_EXECUTABLE_PATH: "dist/packages/engine/main.js"
+      AP_API_KEY: "$RANDOM_STRING"
+      AP_ENCRYPTION_KEY: "e281c5988aee9cce572636a2dc65720e"
+      AP_JWT_SECRET: "d821498c4410060b71e92b6f6c02db411e03eb0189f7eee633038025a3f24780"
+
+      AP_ENVIRONMENT: "prod"
+      AP_FRONTEND_URL: https://$APP_NAME.liara.run
+      AP_WEBHOOK_TIMEOUT_SECONDS: "30"
+      AP_TRIGGER_DEFAULT_POLL_INTERVAL: "5"
+
+      AP_DB_TYPE: "POSTGRES"
+      AP_POSTGRES_DATABASE: postgres
+      AP_POSTGRES_HOST: "$DB_main_HOST"
+      AP_POSTGRES_PORT: "$DB_main_PORT"
+      AP_POSTGRES_USERNAME: "$DB_main_USER"
+      AP_POSTGRES_PASSWORD: "$DB_main_PASSWORD"
+
+      AP_EXECUTION_MODE: "UNSANDBOXED"
+
+      AP_REDIS_HOST: "$DB_base_HOST"
+      AP_REDIS_PORT: "$DB_base_PORT"
+      AP_REDIS_PASSWORD: "$DB_base_PASSWORD"
+
+      AP_FLOW_TIMEOUT_SECONDS: "600"
+      AP_TELEMETRY_ENABLED: "true"
+      AP_TEMPLATES_SOURCE_URL: "https://cloud.activepieces.com/api/v1/flow-templates"
+
+databases:
+  - type: postgres
+    id: main
+    version: '15.4'
+    bundlePlanID: standard
+    planID: small-g2
+  - type: redis
+    id: base
+    version: 7.2.3
+    bundlePlanID: standard
+    planID: small-g2

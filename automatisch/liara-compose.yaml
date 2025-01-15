@@ -1,0 +1,82 @@
+apps:
+  - id: main
+    name: Automatisch
+    image: automatischio/automatisch:0.14.0
+    bundlePlanID: standard
+    planID: small-g2
+
+    disks:
+      - name: storage
+        mountTo: /automatisch/storage
+        size: 50
+        maxSize: 5
+
+    port: 3000
+    envs:
+
+      APP_ENV: "production"
+      HOST: "$APP_NAME.liara.run"
+      PROTOCOL: "https"
+      PORT: "3000"
+
+      ENCRYPTION_KEY: "6oR5Nm2Gl9o9P6Dm4CLWX5g+lnMF2JNVlmGXy3qPmDvTtu0U" # run openssl rand -base64 36 yourself
+      WEBHOOK_SECRET_KEY: "hGvW35qQaC48ffJ+j1M09YMR/zWWTgB41+gibAgmrb2Ypvmq" # run openssl rand -base64 36 yourself
+      APP_SECRET_KEY: "$RANDOM_STRING"
+      
+      POSTGRES_HOST: "$DB_main_HOST"
+      POSTGRES_PORT: "$DB_main_PORT"
+      POSTGRES_DATABASE: "postgres"
+      POSTGRES_USERNAME: "$DB_main_USER"
+      POSTGRES_PASSWORD: "$DB_main_PASSWORD"
+
+      REDIS_HOST: "$DB_base_HOST"
+      REDIS_PORT: "$DB_base_PORT"
+      REDIS_PASSWORD: "$DB_base_PASSWORD"
+
+  - id: worker
+    name: Automatisch
+    image: automatischio/automatisch:0.14.0
+    bundlePlanID: standard
+    planID: small-g2
+
+    disks:
+      - name: storage
+        mountTo: /automatisch/storage
+        size: 50
+        maxSize: 5
+
+    port: 3000
+    envs:
+      
+      WORKER: "true"
+      APP_ENV: "production"
+      HOST: "$APP_main_NAME.liara.run"
+      PROTOCOL: "https"
+      PORT: "3000"
+
+      ENCRYPTION_KEY: "6oR5Nm2Gl9o9P6Dm4CLWX5g+lnMF2JNVlmGXy3qPmDvTtu0U" # run openssl rand -base64 36 yourself
+      WEBHOOK_SECRET_KEY: "hGvW35qQaC48ffJ+j1M09YMR/zWWTgB41+gibAgmrb2Ypvmq" # run openssl rand -base64 36 yourself
+      APP_SECRET_KEY: "$RANDOM_STRING"
+      
+      POSTGRES_HOST: "$DB_main_HOST"
+      POSTGRES_PORT: "$DB_main_PORT"
+      POSTGRES_DATABASE: "postgres"
+      POSTGRES_USERNAME: "$DB_main_USER"
+      POSTGRES_PASSWORD: "$DB_main_PASSWORD"
+
+      REDIS_HOST: "$DB_base_HOST"
+      REDIS_PORT: "$DB_base_PORT"
+      REDIS_PASSWORD: "$DB_base_PASSWORD"
+
+    
+databases:
+  - type: postgres
+    id: main
+    version: '15.4'
+    bundlePlanID: standard
+    planID: small-g2
+  - type: redis
+    id: base
+    version: 7.2.3
+    bundlePlanID: standard
+    planID: small-g2
