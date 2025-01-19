@@ -1,25 +1,35 @@
 apps:
   - id: "prestashop"
     name: "PrestaShop"
-    image: "registry.c2.liara.ir/one-click-apps/prestashop/prestashop:8"
+    image: "prestashop/prestashop:8.2.0"
     bundlePlanID: "standard"
-    planID: "medium-g2"
+    planID: "small-g2"
     port: 80
+
     disks:
       - name: "data"
         mountTo: "/var/www/html"
+        size: "50"
+        maxSize: "5" 
+
     envs:
+      PS_DEV_MODE: "0"
       PS_HOST_MODE: "1"
       PS_INSTALL_DB: "0"
-      PS_ENABLE_SSL: "1"
       PS_INSTALL_AUTO: "1"
+      PS_ENABLE_SSL: "1"
+
       PS_DOMAIN: "$APP_NAME.liara.run"
-      PS_HANDLE_DYNAMIC_DOMAIN: "1"
+
+      PS_FOLDER_ADMIN: "admin"
+
       ADMIN_MAIL: "admin@prestashop.com"
-      ADMIN_PASSWD: "befed8f8-7e34-4674-b459-cb6eebb798f0"
+      ADMIN_PASSWD: "$RANDOM_STRING"
+      
+      PS_HANDLE_DYNAMIC_DOMAIN: "1"
+      DB_SERVER: "$DB_main_HOST"
       DB_USER: "$DB_main_USER"
       DB_PASSWD: "$DB_main_PASSWORD"
-      DB_SERVER: "$DB_main_HOST"
       DB_NAME: "$DB_main_NAME"
 
 databases:
