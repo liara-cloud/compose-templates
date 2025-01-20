@@ -1,0 +1,53 @@
+apps:
+  - id: freescout
+    name: Freescout
+    image: "tiredofit/freescout:php8.2"
+    bundlePlanID: standard
+    planID: small-g2
+    port: 80
+
+    disks:
+      - name: data
+        mountTo: /www/html
+        size: 20
+        maxSize: 2
+
+      - name: secondary
+        mountTo: /data
+        size: 20
+        maxSize: 2
+
+      - name: logs
+        mountTo: /www/logs
+        size: 10
+        maxSize: 0.5
+
+    envs:
+      
+      DB_TYPE: "mysql"
+      DB_HOST: "$DB_main_HOST"
+      DB_PORT: "$DB_main_PORT"
+      DB_NAME: "$DB_main_NAME"
+      DB_USER: "$DB_main_USER"
+      DB_PASS: "$DB_main_PASSWORD"
+
+      SITE_URL: https://$APP_NAME.liara.run
+
+      ADMIN_EMAIL: admin@admin.com
+      ADMIN_PASS: $RANDOM_STRING
+      ADMIN_FIRST_NAME: "Admin"
+      ADMIN_LAST_NAME: "User"
+      APPLICATION_NAME: "Freescout"
+
+      ENABLE_AUTO_UPDATE: "FALSE"
+      ENABLE_SSL_PROXY: "TRUE"
+      DISPLAY_ERRORS: "TRUE"
+      TIMEZONE: "America/Vancouver"
+
+
+databases:
+  - type: mariadb
+    id: main
+    version: 10.6.8
+    bundlePlanID: standard
+    planID: small-g2
