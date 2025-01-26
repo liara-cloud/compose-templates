@@ -1,0 +1,36 @@
+apps:
+  - id: harness
+    name: Harness
+    image: harness/harness:3.1.1
+    bundlePlanID: standard
+    planID: medium-g2
+    
+    disks:
+      - name: tmp
+        mountTo: /data
+        size: 40
+        maxSize: 4
+
+      - name: git
+        mountTo: /git
+        size: 60
+        maxSize: 6
+
+    port: 3000
+    envs:
+      GITNESS_URL_BASE: "https://$APP_NAME.liara.run"
+      GITNESS_DATABASE_DRIVER: "postgres"
+      GITNESS_DATABASE_DATASOURCE: "host=$DB_main_HOST port=$DB_main_PORT sslmode=disable dbname=postgres user=$DB_main_USER password=$DB_main_PASSWORD"
+      GITNESS_PRINCIPAL_ADMIN_EMAIL: "mail@example.com"
+      GITNESS_PRINCIPAL_ADMIN_PASSWORD: "$RANDOM_STRING"
+      GITNESS_USER_SIGNUP_ENABLED: "false"
+      GITNESS_DEBUG: "true" 
+      GITNESS_ENCRYPTER_SECRET: "5778be8b2387a0e491e76f34d0635063" # run openssl rand -hex 16 yourself
+      GITNESS_HTTP_PORT: "3000"
+    
+databases:
+  - type: postgres
+    id: main
+    version: '15.4'
+    bundlePlanID: standard
+    planID: small-g2
