@@ -1,0 +1,131 @@
+apps:
+
+  - id: pgvector
+    name: pgvector
+    image: pgvector/pgvector:pg16
+    bundlePlanID: standard
+    planID: small-g2
+
+    disks:
+      - name: "data"
+        mountTo: /var/lib/postgresql/data
+        size: 50
+        maxSize: 2
+
+    port: 5432
+
+    envs:
+      POSTGRES_DB: "chatwoot"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+
+
+  - id: chatwoot
+    name: chatwoot
+    image: chatwoot/chatwoot:v4.0.1
+    bundlePlanID: standard
+    planID: small-g2
+    args:
+
+      - "bundle"
+      - "exec"
+      - "rails"
+      - "s"
+      - '-p'
+      - '3000'
+      - '-b'
+      - '0.0.0.0'
+
+    disks:
+      - name: "storage"
+        mountTo: /app/storage/
+        size: 50
+        maxSize: 2
+
+    port: 3000
+
+    envs:
+      NODE_ENV: "production"
+      RAILS_ENV: "production"
+      INSTALLATION_ENV: "docker"
+
+      SECRET_KEY_BASE: "replace_with_lengthy_secure_hex"
+      FRONTEND_URL: "https://$APP_NAME.liara.run"
+      FORCE_SSL: "false"
+      ENABLE_ACCOUNT_SIGNUP: "false"
+
+      REDIS_URL: "redis://:$DB_base_PASSWORD@$DB_base_HOST:$DB_base_PORT/1"
+      LOG_LEVEL: "debug"
+      POSTGRES_HOST: "$APP_pgvector_NAME"
+      POSTGRES_PORT: "5432"
+      POSTGRES_DATABASE: "chatwoot"
+      POSTGRES_USERNAME: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+
+      RAILS_MAX_THREADS: "5"
+      SMTP_DOMAIN: "chatwoot.com"
+      SMTP_ADDRESS: "smtp.c1.liara.email"
+      SMTP_PORT: "587"
+      SMTP_USERNAME: ""
+      SMTP_PASSWORD: ""
+      SMTP_ENABLE_STARTTLS_AUTO: "true"
+      # SMTP_TLS=
+      # SMTP_SSL=
+
+  - id: sidekiq
+    name: sidekiq
+    image: chatwoot/chatwoot:v4.0.1
+    bundlePlanID: standard
+    planID: small-g2
+    args:
+
+      - "bundle"
+      - "exec"
+      - "sidekiq"
+      - '-C'
+      - 'config/sidekiq.yml'
+
+    disks:
+      - name: "storage"
+        mountTo: /app/storage
+        size: 50
+        maxSize: 2
+
+    port: 3000
+
+    envs:
+      NODE_ENV: "production"
+      RAILS_ENV: "production"
+      INSTALLATION_ENV: "docker"
+
+      SECRET_KEY_BASE: "replace_with_lengthy_secure_hex"
+      FRONTEND_URL: "https://$APP_chatwoot_NAME.liara.run"
+      FORCE_SSL: "false"
+      ENABLE_ACCOUNT_SIGNUP: "false"
+
+      REDIS_URL: "redis://:$DB_base_PASSWORD@$DB_base_HOST:$DB_base_PORT/1"
+      
+      POSTGRES_HOST: "$APP_pgvector_NAME"
+      POSTGRES_PORT: "5432"
+      POSTGRES_DATABASE: "chatwoot"
+      POSTGRES_USERNAME: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+
+      RAILS_MAX_THREADS: "5"
+      SMTP_DOMAIN: "chatwoot.com"
+      SMTP_ADDRESS: "smtp.c1.liara.email"
+      SMTP_PORT: "587"
+      SMTP_USERNAME: ""
+      SMTP_PASSWORD: ""
+      SMTP_ENABLE_STARTTLS_AUTO: "true"
+      # SMTP_TLS=
+      # SMTP_SSL=
+
+
+databases:
+ 
+  - type: redis
+    id: base
+    version: 7.2.3
+    bundlePlanID: standard
+    planID: small-g2
