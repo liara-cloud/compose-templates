@@ -1,0 +1,77 @@
+apps:
+  - id: "postiz"
+    name: "postiz"
+    image: "ghcr.io/gitroomhq/postiz-app:latest"
+    bundlePlanID: "standard"
+    planID: "medium-g2"
+    port: 5000
+
+    disks:
+      - name: "config"
+        mountTo: "/config"
+        size: 10
+        maxSize: 1
+      - name: "uploads"
+        mountTo: "/uploads"
+        size: 50
+        maxSize: 5
+
+    envs:
+      MAIN_URL: "https://$APP_NAME.liara.run"
+      FRONTEND_URL: "https://$APP_NAME.liara.run"
+      NEXT_PUBLIC_BACKEND_URL: "https://$APP_NAME.liara.run/api"
+      JWT_SECRET: "$RANDOM_STRING"
+
+      DATABASE_URL: "postgresql://$DB_main_USER:$DB_main_PASSWORD@$DB_main_HOST:$DB_main_PORT/postgres"
+      REDIS_URL: "redis://:$DB_base_PASSWORD@$DB_base_HOST:$DB_base_PORT"
+
+      BACKEND_INTERNAL_URL: "http://$APP_NAME:3000"
+      IS_GENERAL: "true"
+      STORAGE_PROVIDER: "local"
+      UPLOAD_DIRECTORY: "/uploads"
+      NEXT_PUBLIC_UPLOAD_DIRECTORY: "/uploads"
+
+      # X_API_KEY: ""
+      # X_API_SECRET: ""
+      # X_CLIENT: ""
+      # X_SECRET: ""
+      # LINKEDIN_CLIENT_ID: ""
+      # LINKEDIN_CLIENT_SECRET: ""
+      # REDDIT_CLIENT_ID: ""
+      # REDDIT_CLIENT_SECRET: ""
+      # GITHUB_CLIENT_ID: ""
+      # GITHUB_CLIENT_SECRET: ""
+      # BEEHIIVE_API_KEY: ""
+      # BEEHIIVE_PUBLICATION_ID: ""
+      # THREADS_APP_ID: ""
+      # THREADS_APP_SECRET: ""
+      # FACEBOOK_APP_ID: ""
+      # FACEBOOK_APP_SECRET: ""
+      # YOUTUBE_CLIENT_ID: ""
+      # YOUTUBE_CLIENT_SECRET: ""
+      # TIKTOK_CLIENT_ID: ""
+      # TIKTOK_CLIENT_SECRET: ""
+      # PINTEREST_CLIENT_ID: ""
+      # PINTEREST_CLIENT_SECRET: ""
+      # DRIBBBLE_CLIENT_ID: ""
+      # DRIBBBLE_CLIENT_SECRET: ""
+      # DISCORD_CLIENT_ID: ""
+      # DISCORD_CLIENT_SECRET: ""
+      # DISCORD_BOT_TOKEN_ID: ""
+      # SLACK_ID: ""
+      # SLACK_SECRET: ""
+      # SLACK_SIGNING_SECRET: ""
+      # MASTODON_CLIENT_ID: ""
+      # MASTODON_CLIENT_SECRET: ""
+
+databases:
+  - type: postgres
+    id: main
+    version: '15.4'
+    bundlePlanID: standard
+    planID: small-g2
+  - type: redis
+    id: base
+    version: 7.2.3
+    bundlePlanID: standard
+    planID: small-g2
