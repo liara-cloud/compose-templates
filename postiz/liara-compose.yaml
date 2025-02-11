@@ -1,7 +1,7 @@
 apps:
   - id: "postiz"
     name: "postiz"
-    image: "ghcr.io/gitroomhq/postiz-app:latest"
+    image: "ghcr.io/gitroomhq/postiz-app:v1.33.2-amd64"
     bundlePlanID: "standard"
     planID: "medium-g2"
     port: 5000
