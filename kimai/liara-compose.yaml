@@ -1,0 +1,25 @@
+apps:
+  - id: kimai
+    name: kimai
+    image: kimai/kimai2:apache-2.31.0
+    bundlePlanID: standard
+    planID: small-g2
+    port: 8001
+
+    disks:
+      - name: "data"
+        mountTo: "/opt/kimai/var"
+        size: 50
+        maxSize: 5
+
+    envs:
+      ADMINMAIL: "admin@kimai.local"
+      ADMINPASS: "$RANDOM_STRING"
+      DATABASE_URL: mysql://$DB_main_USER:$DB_main_PASSWORD@$DB_main_HOST:$DB_main_PORT/$DB_main_NAME?charset=utf8mb4&serverVersion=8.0.30"
+
+databases:
+  - type: "mysql"
+    id: "main"
+    version: "8.0.30"
+    bundlePlanID: "standard"
+    planID: "medium-g2"
