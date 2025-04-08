@@ -1,0 +1,45 @@
+apps:
+  - id: "wordpress-openlitespeed"
+    name: "WordPress-OpenLiteSpeed"
+    image: "registry.c2.liara.ir/one-click-apps/wordpress-openlitespeed:1.8.1-lsphp81-wp6"
+    availableImageTags:
+      - "1.8.1-lsphp74-wp6"
+      - "1.8.1-lsphp83-wp6"
+      - "1.8.1-lsphp82-wp6"
+      - "1.8.1-lsphp81-wp6"
+      - "1.8.1-lsphp80-wp6"
+
+    bundlePlanID: "standard"
+    planID: "medium-g2"
+    disks:
+
+      - name: "tmp"
+        mountTo: "/tmp"
+        size: 10
+        maxSize: 0.5
+
+      - name: "data"
+        mountTo: "/var/www/site/html"
+
+    port: 8088
+
+    envs:
+      WORDPRESS_DB_HOST: "$DB_main_HOST:$DB_main_PORT"
+      WORDPRESS_DB_USER: "$DB_main_USER"
+      WORDPRESS_DB_PASSWORD: "$DB_main_PASSWORD"
+      WORDPRESS_DB_NAME: "$DB_main_NAME"
+      PHP_INI_CONFIG: |
+        file_uploads = On
+        memory_limit = 256M
+        upload_max_filesize = 64M
+        post_max_size = 128M
+        max_execution_time = 600
+      
+      PHP_LSAPI_CHILDREN: "40" # Number of PHP processes to handle requests
+
+databases:
+  - type: "mariadb"
+    id: "main"
+    version: "10.6.8"
+    bundlePlanID: "standard"
+    planID: "small-g2"
