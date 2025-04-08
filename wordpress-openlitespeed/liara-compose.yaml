@@ -35,7 +35,7 @@ apps:
         post_max_size = 128M
         max_execution_time = 600
       
-      PHP_LSAPI_CHILDREN: "40" # Number of PHP processes to handle requests
+      PHP_LSAPI_CHILDREN: "50" # Number of PHP processes to handle requests
 
 databases:
   - type: "mariadb"
