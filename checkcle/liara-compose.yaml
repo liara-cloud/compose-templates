@@ -1,0 +1,14 @@
+apps:
+  - id: checkcle
+    name: checkcle
+    image: operacle/checkcle:v1.2.0
+    bundlePlanID: standard
+    planID: small-g2
+    port: 8090
+    disks:
+      - name: "data"
+        mountTo: "/mnt/pb_data"
+        size: 50
+        maxSize: 5
+
+   
