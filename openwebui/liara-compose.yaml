@@ -1,0 +1,26 @@
+apps:
+  
+  - id: open-webui
+    name: OpenWebUI
+    image: ghcr.io/open-webui/open-webui:git-ed0659a
+    bundlePlanID: standard
+    planID: medium-g2
+    port: 8080
+
+    disks:
+      - name: data
+        mountTo: /app/backend/data
+        size: 90
+        maxSize: 10
+
+    envs:
+      ENV: "prod"
+      WEBUI_URL: "https://$APP_NAME.liara.run"
+      PORT: "8080"
+      DATA_DIR: "/app/backend/data"
+      WEBUI_NAME: "Awesome ChatBot"
+      CORS_ALLOW_ORIGIN: "*"
+      
+      ENABLE_OPENAI_API: "True"
+      OPENAI_API_BASE_URL: "replace_with_your_openai_api_base_url"
+      OPENAI_API_KEY: "replace_with_your_liara_api_key"
