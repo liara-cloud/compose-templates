@@ -1,0 +1,19 @@
+apps:
+  - id: registry
+    name: registry
+    image: registry.c2.liara.ir/one-click-apps/registry:2
+    bundlePlanID: standard
+    planID: medium-g2
+    disks:
+      - name: data
+        mountTo: /var/lib/registry
+    port: 5000
+    envs:
+      REGISTRY_HTTP_ADDR: 0.0.0.0:5000
+      REGISTRY_HTTP_SECRET: my_secret
+      REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
+      REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
+      REGISTRY_STORAGE_DELETE_ENABLED: 'true'
+      USERNAME: admin
+      PASSWORD: password
+      AUTH_MODE: private
