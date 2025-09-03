@@ -1,0 +1,16 @@
+apps:
+  - id: "lobechat"
+    name: "lobechat"
+    image: "lobehub/lobe-chat:1.120.7"
+    bundlePlanID: "standard"
+    planID: "medium-g2"
+    port: 3210
+    disks:
+      - name: "data"
+        mountTo: "/app"
+
+    envs:
+      OPENAI_API_KEY: "REPLACE-ME-WITH-LIARA-API-TOKEN"
+      OPENAI_PROXY_URL: "REPLACE-ME-WITH-LIARA-BASE-URL"
+      ACCESS_CODE: "$RANDOM_STRING"
+      OPENAI_MODEL_LIST: "openai/gpt-4o-mini"
