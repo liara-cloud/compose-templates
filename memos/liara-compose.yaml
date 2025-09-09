@@ -1,0 +1,19 @@
+apps:
+  - id: memos
+    name: memos
+    image: neosmemo/memos:0.25.0
+    bundlePlanID: standard
+    planID: small-g2
+    port: 5230
+    
+    disks:
+      - name: "memos"
+        mountTo: "/var/opt/memos"
+        size: 50
+        maxSize: 5
+    envs:
+  
+      MEMOS_MODE: "prod"
+      MEMOS_PORT: "5230"
+      MEMOS_DATA: "/var/opt/memos"
+      MEMOS_DRIVER: "sqlite" # it can be "postgres" or "sqlite"
