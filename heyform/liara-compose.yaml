@@ -1,0 +1,46 @@
+apps:
+  - id: "heyform"
+    name: "HeyForm"
+    image: "heyform/community-edition:v0.1.0"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    disks:
+      - name: "assets"
+        mountTo: "/app/static/upload"
+
+    port: 8000
+    envs:
+
+      APP_HOMEPAGE_URL: "https://$APP_NAME.liara.run"
+      SESSION_KEY: "jiOfmTJxRJsqEPBLEjE+ycz3SjnfDYVQ2mXq8PHoge8=" #  openssl rand -base64 32
+      FORM_ENCRYPTION_KEY: "ydJr7T8m/oDwgqP69Go2umBIx6O/mmsia0EkqClH4T0=" #  openssl rand -base64 32
+      
+      MONGO_URI: "mongodb://$DB_main_USER:$DB_main_PASSWORD@$DB_main_HOST:$DB_main_PORT/heyform?authSource=admin"
+ 
+      REDIS_HOST: "$DB_base_HOST"
+      REDIS_PORT:  "$DB_base_PORT"
+      REDIS_PASSWORD: "$DB_base_PASSWORD"
+
+      OPENAI_BASE_URL: "" 
+      OPENAI_API_KEY: ""
+      OPENAI_GPT_MODEL: "openai/gpt-4o-mini"
+
+      VERIFY_USER_EMAIL: "false"
+      SMTP_FROM: ""
+      SMTP_HOST: "smtp.c1.liara.email"
+      SMTP_PORT: "465"
+      SMTP_USER: "" 
+      SMTP_PASSWORD: ""
+
+databases:
+  - type: "mongodb"
+    id: "main"
+    version: "7.0.5"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+
+  - type: redis
+    id: base
+    version: 7.2.3
+    bundlePlanID: standard
+    planID: small-g2

@@ -1,0 +1,39 @@
+apps:
+  - id: documenso
+    name: documenso
+    image: documenso/documenso:v1.12.4
+    bundlePlanID: standard
+    planID: small-g2
+    port: 3000
+    envs:
+
+      PORT: "3000"
+      NEXTAUTH_SECRET: "qHfQvo05h/+98oxYr2VcJnbQwGlnlURV0gqgI4xT95Q: " # openssl rand -base64 32
+      NEXT_PRIVATE_ENCRYPTION_KEY: "oSxH/yTNQTzxWwyGYcY58Hisb1D2cRbDOn/Lelp1Vx0: " # openssl rand -base64 32
+      NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY: "4VxVoZRgHOe2cVwreP9v50YfE7WQMochFxiG1SE8aV8: " # openssl rand -base64 32
+      
+      NEXT_PUBLIC_WEBAPP_URL: "https://$APP_NAME.liara.run"
+      NEXT_PRIVATE_INTERNAL_WEBAPP_URL: "http://$APP_NAME:3000"
+      NEXT_PRIVATE_DATABASE_URL: "postgresql://$DB_main_USER:$DB_main_PASSWORD@$DB_main_HOST:$DB_main_PORT/postgres"
+      NEXT_PRIVATE_DIRECT_DATABASE_URL: "postgresql://$DB_main_USER:$DB_main_PASSWORD@$DB_main_HOST:$DB_main_PORT/postgres"
+      NEXT_PUBLIC_UPLOAD_TRANSPORT: "database"
+      
+      NEXT_PUBLIC_DOCUMENT_SIZE_UPLOAD_LIMIT: "10"
+      
+      NEXT_PRIVATE_SIGNING_TRANSPORT: "local"
+      NEXT_PRIVATE_SIGNING_PASSPHRASE: "$RANDOM_STRING"
+
+      NEXT_PRIVATE_SMTP_TRANSPORT: "smtp-auth"
+      NEXT_PRIVATE_SMTP_HOST: "smtp.c1.liara.email"
+      NEXT_PRIVATE_SMTP_PORT: "587"
+      NEXT_PRIVATE_SMTP_USERNAME: "replace-me"
+      NEXT_PRIVATE_SMTP_PASSWORD: "replace-me"
+      NEXT_PRIVATE_SMTP_FROM_NAME: "Documenso"
+      NEXT_PRIVATE_SMTP_FROM_ADDRESS: "repl@ce.me"
+
+databases:
+  - type: postgres
+    id: main
+    version: '15.4'
+    bundlePlanID: standard
+    planID: small-g2
