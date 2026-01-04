@@ -1,57 +1,43 @@
 apps:
   - id: kutt
     name: kutt
-    image: kutt/kutt:v2.7.4
+    image: kutt/kutt:v3.2.3
     bundlePlanID: standard
     planID: small-g2
     port: 3000
 
+    disks:
+    - name: custom
+      mountTo: /kutt/custom
+      size: 10
+      maxSize: 0.5
+    - name: database
+      mountTo: /kutt/db
+      size: 10
+      maxSize: 0.5
+
     envs:
+      JWT_SECRET: "$RANDOM_STRING" # run openssl rand -base64 32
       PORT: "3000"
-
-      DB_HOST: "$DB_main_HOST"
-      DB_PORT: "$DB_main_PORT"
-      DB_NAME: "postgres"
-      DB_USER: "$DB_main_USER"
-      DB_PASSWORD: "$DB_main_PASSWORD"
-      DB_SSL: "false"
-
-      REDIS_HOST: "$DB_base_HOST"
-      REDIS_PORT: "$DB_base_PORT"
-      REDIS_PASSWORD: "$DB_base_PASSWORD"
-
-      DISALLOW_REGISTRATION: "false"
-      DISALLOW_ANONYMOUS_LINKS: "false"
-
-      USER_LIMIT_PER_DAY: "50"
-      NON_USER_COOLDOWN: "0"
-      DEFAULT_MAX_STATS_PER_LINK: "5000"
-      CUSTOM_DOMAIN_USE_HTTPS: "true"
-      JWT_SECRET: "$RANDOM_STRING"
-      ADMIN_EMAILS: "admin@example.com"
-      CONTACT_EMAIL: "admin@example.com"
 
       SITE_NAME: "Kutt"
       DEFAULT_DOMAIN: "$APP_NAME.liara.run"
-      LINK_LENGTH: "6"
+      CUSTOM_DOMAIN_USE_HTTPS: "true"
 
+      LINK_LENGTH: "5"
+      DISALLOW_ANONYMOUS_LINKS: "true"
+      DISALLOW_REGISTRATION: "false"
+
+      DB_CLIENT: "better-sqlite3"
+      DB_FILENAME: "db/data"
+
+      CONTACT_EMAIL: "admin@example.com"
+      REPORT_EMAIL: "admin@example.com"
+
+      MAIL_ENABLED: "false"
       MAIL_HOST: "smtp.c1.liara.email"
       MAIL_PORT: "587"
       MAIL_SECURE: "false"
       MAIL_USER: ""
       MAIL_FROM: ""
       MAIL_PASSWORD: ""
-
-
-databases:
-  - type: postgres
-    id: main
-    version: '15.4'
-    bundlePlanID: standard
-    planID: small-g2
-
-  - type: redis
-    id: base
-    version: 7.2.3
-    bundlePlanID: standard
-    planID: small-g2
