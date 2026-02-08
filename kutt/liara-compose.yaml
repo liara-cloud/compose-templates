@@ -17,27 +17,22 @@ apps:
       maxSize: 0.5
 
     envs:
-      JWT_SECRET: "$RANDOM_STRING" # run openssl rand -base64 32
-      PORT: "3000"
-
-      SITE_NAME: "Kutt"
-      DEFAULT_DOMAIN: "$APP_NAME.liara.run"
-      CUSTOM_DOMAIN_USE_HTTPS: "true"
-
-      LINK_LENGTH: "5"
-      DISALLOW_ANONYMOUS_LINKS: "true"
-      DISALLOW_REGISTRATION: "false"
-
-      DB_CLIENT: "better-sqlite3"
-      DB_FILENAME: "db/data"
-
-      CONTACT_EMAIL: "admin@example.com"
-      REPORT_EMAIL: "admin@example.com"
-
-      MAIL_ENABLED: "false"
-      MAIL_HOST: "smtp.c1.liara.email"
-      MAIL_PORT: "587"
-      MAIL_SECURE: "false"
-      MAIL_USER: ""
-      MAIL_FROM: ""
-      MAIL_PASSWORD: ""
+      JWT_SECRET: $RANDOM_STRING
+      PORT: '3000'
+      SITE_NAME: Kutt
+      DEFAULT_DOMAIN: $APP_NAME.liara.run
+      CUSTOM_DOMAIN_USE_HTTPS: 'true'
+      LINK_LENGTH: '5'
+      DISALLOW_ANONYMOUS_LINKS: 'true'
+      DISALLOW_REGISTRATION: 'false'
+      DB_CLIENT: better-sqlite3
+      DB_FILENAME: db/data
+      CONTACT_EMAIL: admin@example.com
+      REPORT_EMAIL: admin@example.com
+      MAIL_ENABLED: 'false'
+      MAIL_HOST: smtp.c1.liara.email
+      MAIL_PORT: '587'
+      MAIL_SECURE: 'false'
+      MAIL_USER: ''
+      MAIL_FROM: ''
+      MAIL_PASSWORD: ''
