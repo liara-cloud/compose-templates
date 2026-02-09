@@ -1,0 +1,82 @@
+apps:
+
+  - id: penpot-frontend
+    name: penpot-frontend
+    image: penpotapp/frontend:2.13.0
+    bundlePlanID: standard
+    planID: small-g2
+    port: 8080
+
+    envs:
+      PENPOT_FLAGS: "enable-registration enable-login-with-password disable-email-verification enable-backend-api-doc"
+
+      PENPOT_HTTP_SERVER_MAX_BODY_SIZE: "31457280"
+      PENPOT_HTTP_SERVER_MAX_MULTIPART_BODY_SIZE: "367001600"
+
+      PENPOT_EXPORTER_URI: "http://replace-me-with-exporter-app-name:6061"
+      PENPOT_BACKEND_URI: "http://replace-me-with-backend-app-name:6060"
+
+  - id: penpot-backend
+    name: penpot-backend
+    image: penpotapp/backend:2.13.0
+    bundlePlanID: standard
+    planID: medium-g2
+    port: 6060
+    
+    envs:
+      PENPOT_FLAGS: "enable-registration enable-login-with-password disable-email-verification enable-backend-api-doc"
+      
+      PENPOT_PUBLIC_URI: "https://$APP_penpot-frontend_NAME.liara.run"
+
+      PENPOT_HTTP_SERVER_MAX_BODY_SIZE: "31457280"
+      PENPOT_HTTP_SERVER_MAX_MULTIPART_BODY_SIZE: "367001600"
+
+      PENPOT_SECRET_KEY: "change-this-insecure-key"
+
+      PENPOT_DATABASE_URI: "postgresql://$DB_main_HOST:$DB_main_PORT/postgres"
+      PENPOT_DATABASE_USERNAME: "$DB_main_USER"
+      PENPOT_DATABASE_PASSWORD: "$DB_main_PASSWORD"
+
+      PENPOT_REDIS_URI: "redis://:$DB_base_PASSWORD@$DB_base_HOST:$DB_base_PORT/0"
+
+      PENPOT_TELEMETRY_ENABLED: "false"
+
+      PENPOT_SMTP_DEFAULT_FROM: "no-reply@example.com"
+      PENPOT_SMTP_DEFAULT_REPLY_TO: "no-reply@example.com"
+      PENPOT_SMTP_HOST: "smtp.c1.liara.email"
+      PENPOT_SMTP_PORT: "465"
+      PENPOT_SMTP_USERNAME: ""
+      PENPOT_SMTP_PASSWORD: ""
+      PENPOT_SMTP_TLS: "true"
+      PENPOT_SMTP_SSL: "false"
+
+      AWS_ACCESS_KEY_ID: "replace-me-with-access-key-id"
+      AWS_SECRET_ACCESS_KEY: "replace-me-with-secret-access-key"
+      PENPOT_OBJECTS_STORAGE_BACKEND: "s3"
+      PENPOT_OBJECTS_STORAGE_S3_REGION: "us-east-1"
+      PENPOT_OBJECTS_STORAGE_S3_BUCKET: "replace-me-with-bucket-name"
+      PENPOT_OBJECTS_STORAGE_S3_ENDPOINT: "https://storage.iran.liara.space"
+
+  - id: penpot-exporter
+    name: penpot-exporter
+    image: penpotapp/exporter:2.13.0
+    bundlePlanID: standard
+    planID: standard-base-g2
+    port: 6061
+    envs:
+      PENPOT_SECRET_KEY: "change-this-insecure-key"
+      PENPOT_PUBLIC_URI: "https://$APP_penpot-frontend_NAME.liara.run"
+      PENPOT_REDIS_URI: "redis://:$DB_base_PASSWORD@$DB_base_HOST:$DB_base_PORT/0"
+      
+databases:
+  - type: postgres
+    id: main
+    version: '18.0'
+    bundlePlanID: standard
+    planID: small-g2
+    
+  - type: redis
+    id: base
+    version: 7.2.3
+    bundlePlanID: standard
+    planID: small-g2
