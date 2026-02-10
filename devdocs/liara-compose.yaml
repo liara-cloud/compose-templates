@@ -1,0 +1,9 @@
+apps:
+  - id: devdocs
+    name: devdocs
+    image: registry.c2.liara.ir/one-click-apps/devdocs:20251201
+    bundlePlanID: standard
+    planID: small-g2
+    port: 9292
+
+
