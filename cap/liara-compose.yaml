@@ -1,0 +1,25 @@
+apps:
+  - id: cap
+    name: Cap
+    image: registry.c2.liara.ir/one-click-apps/tiago2-cap:3.0.7
+    bundlePlanID: standard
+    planID: small-g2
+    port: 3000
+    envs:
+      ADMIN_KEY: "$RANDOM_STRING"
+      REDIS_URL: "redis://:$DB_base_PASSWORD@$DB_base_HOST:$DB_base_PORT"
+      SHOW_ERRORS: "true"
+      
+    disks:
+      - name: data
+        mountTo: "/usr/src/app/data"
+        size: 60
+        maxSize: 6
+
+databases:
+
+  - type: redis
+    id: base
+    version: 7.2.3
+    bundlePlanID: standard
+    planID: small-g2
