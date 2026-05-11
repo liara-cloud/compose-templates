@@ -1,0 +1,38 @@
+apps:
+  - id: "hitkeep"
+    name: "HitKeep"
+    image: "pascalebeier/hitkeep:latest"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    port: 8080
+
+    disks:
+      - name: data
+        mountTo: /var/lib/hitkeep/data
+        size: 50
+        maxSize: 5
+        
+    envs:
+      HITKEEP_JWT_SECRET: "$RANDOM_STRING"
+      HITKEEP_PUBLIC_URL: "https://$APP_NAME.liara.run"
+      HITKEEP_AUTH_REMEMBER_ME_DAYS: "30"
+      HITKEEP_DB_PATH: "hitkeep.db"
+      HITKEEP_LOG_LEVEL: "info"
+
+      HITKEEP_GOOGLE_SEARCH_CONSOLE_CLIENT_ID: ""
+      HITKEEP_GOOGLE_SEARCH_CONSOLE_CLIENT_SECRET: ""
+      HITKEEP_GOOGLE_SEARCH_CONSOLE_REDIRECT_URL: ""
+
+      HITKEEP_MAIL_DRIVER: "smtp"
+      HITKEEP_MAIL_HOST: ""
+      HITKEEP_MAIL_PORT: "587"
+      HITKEEP_MAIL_USERNAME: ""
+      HITKEEP_MAIL_PASSWORD: ""
+      HITKEEP_MAIL_ENCRYPTION: "tls"
+      HITKEEP_MAIL_FROM_ADDRESS: ""
+      HITKEEP_MAIL_FROM_NAME: "HitKeep"
+
+      HITKEEP_TRUSTED_PROXIES: "*"
+
+
+      
