@@ -1,0 +1,31 @@
+apps:
+  - id: tuwunel
+    name: Tuwunel
+    image: jevolk/tuwunel:v1.6.2
+    bundlePlanID: standard
+    planID: "small-g2"
+    port: 6167
+
+    disks:
+      - name: database
+        mountTo: /var/lib/tuwunel
+        size: 50
+        maxSize: 40
+
+    envs: 
+      TUWUNEL_SERVER_NAME: "$APP_NAME.liara.run"
+      TUWUNEL_DATABASE_PATH: "/var/lib/tuwunel"
+      TUWUNEL_PORT: "6167"
+      TUWUNEL_MAX_REQUEST_SIZE: "20000000"
+      TUWUNEL_ALLOW_REGISTRATION: "true"
+      TUWUNEL_REGISTRATION_TOKEN: "$RANDOM_STRING"
+      TUWUNEL_ALLOW_FEDERATION: "false"
+      TUWUNEL_TRUSTED_SERVERS: "[]"
+      TUWUNEL_ADDRESS: "0.0.0.0"
+
+  - id: cinny
+    name: Cinny
+    image: ajbura/cinny:v4.11.1
+    bundlePlanID: standard
+    planID: small-g2
+    port: 80
