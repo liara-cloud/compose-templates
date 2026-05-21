@@ -1,0 +1,17 @@
+apps:
+  - id: "peekaping"
+    name: "Peekaping"
+    image: "registry.c2.liara.ir/one-click-apps/peekaping-bundle-sqlite:0.0.46"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    disks:
+      - name: sqlite
+        mountTo: /app/data
+        size: 50
+        maxSize: 5
+
+    port: 8383
+
+    envs:
+      DB_NAME: "/app/data/peekaping.db"
+      DB_TYPE: "sqlite"     

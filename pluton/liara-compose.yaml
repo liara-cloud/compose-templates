@@ -1,0 +1,31 @@
+apps:
+  - id: "pluton"
+    name: "Pluton"
+    image: "registry.c2.liara.ir/one-click-apps/plutonhq-pluton:0.16.1"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    disks:
+      - name: data
+        mountTo: /data
+        size: 50
+        maxSize: 5
+
+    port: 5173
+
+    envs:
+      ENCRYPTION_KEY: "$RANDOM_STRING"
+      USER_NAME: "admin"
+      USER_PASSWORD: "$RANDOM_STRING"
+
+      APP_TITLE: "Pluton"
+      APP_URL: "https://$APP_NAME.liara.run"
+      SERVER_PORT: "5173"
+      MAX_CONCURRENT_BACKUPS: "2"
+      SESSION_DURATION: "7"
+
+      ALLOW_CUSTOM_RESTORE_PATH: "true"
+      ALLOW_FILE_BROWSER: "true"
+      DISABLE_EVENT_SCRIPTS: "false"
+      
+      NODE_ENV: "production"
+      IS_DOCKER: "true"
