@@ -10,7 +10,7 @@ apps:
       - name: database
         mountTo: /var/lib/tuwunel
         size: 50
-        maxSize: 40
+        maxSize: 4
 
     envs: 
       TUWUNEL_SERVER_NAME: "$APP_NAME.liara.run"

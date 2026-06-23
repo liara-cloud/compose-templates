@@ -1,7 +1,7 @@
 apps:
   - id: kutt
     name: kutt
-    image: kutt/kutt:v3.2.3
+    image: registry.c2.liara.ir/one-click-apps/kutt:v3.2.5
     bundlePlanID: standard
     planID: small-g2
     port: 3000
@@ -11,28 +11,40 @@ apps:
       mountTo: /kutt/custom
       size: 10
       maxSize: 0.5
-    - name: database
-      mountTo: /kutt/db
-      size: 10
-      maxSize: 0.5
 
     envs:
-      JWT_SECRET: $RANDOM_STRING
+
+      JWT_SECRET: '$RANDOM_STRING'
       PORT: '3000'
-      SITE_NAME: Kutt
-      DEFAULT_DOMAIN: $APP_NAME.liara.run
+
+      SITE_NAME: 'Liara / Karli Link Shortener'
+      DEFAULT_DOMAIN: '$APP_NAME.liara.run'
       CUSTOM_DOMAIN_USE_HTTPS: 'true'
       LINK_LENGTH: '5'
       DISALLOW_ANONYMOUS_LINKS: 'true'
       DISALLOW_REGISTRATION: 'false'
-      DB_CLIENT: better-sqlite3
-      DB_FILENAME: db/data
-      CONTACT_EMAIL: admin@example.com
-      REPORT_EMAIL: admin@example.com
+
+      DB_CLIENT: 'mysql2'
+      DB_HOST: '$DB_main_HOST'
+      DB_PORT: '$DB_main_PORT'
+      DB_NAME: '$DB_main_NAME'
+      DB_USER: '$DB_main_USER'
+      DB_PASSWORD: '$DB_main_PASSWORD'
+
+      CONTACT_EMAIL: 'social@karli.ir'
+      REPORT_EMAIL: 'social@karli.ir'
       MAIL_ENABLED: 'false'
-      MAIL_HOST: smtp.c1.liara.email
+      MAIL_HOST: 'smtp.c1.liara.email'
       MAIL_PORT: '587'
       MAIL_SECURE: 'false'
       MAIL_USER: ''
       MAIL_FROM: ''
       MAIL_PASSWORD: ''
+
+
+databases:
+  - type: "mysql"
+    id: "main"
+    version: "8.0.30"
+    bundlePlanID: "standard"
+    planID: "medium-g2"

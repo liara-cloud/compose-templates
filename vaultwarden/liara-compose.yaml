@@ -1,0 +1,18 @@
+apps:
+
+  - id: "vaultwarden"
+    name: "Vaultwarden"
+    image: "registry.c2.liara.ir/one-click-apps/vaultwarden-server:1.36.0"
+    bundlePlanID: "standard"
+    planID: "small-g2"
+    port: 80
+    disks:
+      - name: data
+        mountTo: /data
+        size: 50
+        maxSize: 4
+
+    envs:
+      DOMAIN: "https://$APP_NAME.liara.run"
+      
+

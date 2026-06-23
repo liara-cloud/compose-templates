@@ -27,6 +27,7 @@ apps:
       ADMIN_PASSWD: "$RANDOM_STRING"
       
       PS_HANDLE_DYNAMIC_DOMAIN: "1"
+      
       DB_SERVER: "$DB_main_HOST"
       DB_USER: "$DB_main_USER"
       DB_PASSWD: "$DB_main_PASSWORD"
