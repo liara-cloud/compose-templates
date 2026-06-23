@@ -1,0 +1,43 @@
+apps:
+  - id: dolibarr
+    name: Dolibarr
+    image: registry.c2.liara.ir/one-click-apps/dolibarr:23.0.3
+    bundlePlanID: standard
+    planID: small-g2
+    port: 80
+
+    disks:
+    - name: documents
+      mountTo: /var/www/documents
+      size: 50
+      maxSize: 5
+    - name: data
+      mountTo: /var/www/html/custom
+      size: 50
+      maxSize: 5
+    
+    envs:
+      DOLI_INIT_DEMO: "0"
+
+      DOLI_DB_HOST: "$DB_main_HOST"
+      DOLI_DB_HOST_PORT: "$DB_main_PORT"
+      DOLI_DB_NAME: "$DB_main_NAME"
+      DOLI_DB_USER: "$DB_main_USER"
+      DOLI_DB_PASSWORD: "$DB_main_PASSWORD"
+
+      DOLI_URL_ROOT: "https://$APP_NAME.liara.run"
+      DOLI_ADMIN_LOGIN: "admin"
+      DOLI_ADMIN_PASSWORD: "$RANDOM_STRING"
+
+      DOLI_CRON: "0"
+      DOLI_CRON_KEY: "$RANDOM_STRING"
+
+      DOLI_COMPANY_NAME: "Liara"
+
+
+databases:
+  - type: "mariadb"
+    id: "main"
+    version: "10.6.8"
+    bundlePlanID: "standard"
+    planID: "small-g2"
