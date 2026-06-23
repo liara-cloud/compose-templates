@@ -1,0 +1,35 @@
+apps:
+  - id: photoprism
+    name: PhotoPrism
+    image: registry.c2.liara.ir/one-click-apps/photoprism:260601
+    bundlePlanID: standard
+    planID: medium-g2
+    port: 2342
+
+    disks:
+    - name: storage
+      mountTo: /photoprism/storage
+      size: 30
+      maxSize: 3
+
+    - name: originals
+      mountTo: /photoprism/originals
+      size: 30
+      maxSize: 3
+
+    - name: import
+      mountTo: /photoprism/import
+      size: 40
+      maxSize: 4
+
+    envs:
+      PHOTOPRISM_UPLOAD_NSFW: "true"
+      PHOTOPRISM_PROD: "false"
+
+      PHOTOPRISM_ADMIN_USER: "admin"
+      PHOTOPRISM_ADMIN_PASSWORD: "$RANDOM_STRING"
+
+      PHOTOPRISM_SITE_URL: "https://$APP_NAME.liara.run"
+      PHOTOPRISM_TRUSTED_PROXY: "*"
+
+
