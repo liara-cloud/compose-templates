@@ -1,38 +1,27 @@
 apps:
-  - id: "hitkeep"
-    name: "HitKeep"
-    image: "pascalebeier/hitkeep:latest"
+  - id: "hermes-agent"
+    name: "Hermes-Agent"
+    image: "nousresearch/hermes-agent:v2026.8.3"
     bundlePlanID: "standard"
     planID: "small-g2"
-    port: 8080
+    port: 8642
 
     disks:
       - name: data
-        mountTo: /var/lib/hitkeep/data
+        mountTo: /opt/data
         size: 50
         maxSize: 5
         
+    args:
+      - gateway
+      - run
+        
+
     envs:
-      HITKEEP_JWT_SECRET: "$RANDOM_STRING"
-      HITKEEP_PUBLIC_URL: "https://$APP_NAME.liara.run"
-      HITKEEP_AUTH_REMEMBER_ME_DAYS: "30"
-      HITKEEP_DB_PATH: "hitkeep.db"
-      HITKEEP_LOG_LEVEL: "info"
-
-      HITKEEP_GOOGLE_SEARCH_CONSOLE_CLIENT_ID: ""
-      HITKEEP_GOOGLE_SEARCH_CONSOLE_CLIENT_SECRET: ""
-      HITKEEP_GOOGLE_SEARCH_CONSOLE_REDIRECT_URL: ""
-
-      HITKEEP_MAIL_DRIVER: "smtp"
-      HITKEEP_MAIL_HOST: ""
-      HITKEEP_MAIL_PORT: "587"
-      HITKEEP_MAIL_USERNAME: ""
-      HITKEEP_MAIL_PASSWORD: ""
-      HITKEEP_MAIL_ENCRYPTION: "tls"
-      HITKEEP_MAIL_FROM_ADDRESS: ""
-      HITKEEP_MAIL_FROM_NAME: "HitKeep"
-
-      HITKEEP_TRUSTED_PROXIES: "*"
+      API_SERVER_ENABLED: "true"
+      API_SERVER_HOST: "0.0.0.0"
+      API_SERVER_PORT: "8642"
+      API_SERVER_KEY: "$RANDOM_STRING"
 
 
       
