@@ -1,0 +1,22 @@
+apps:
+  - id: supermemory
+    name: supermemory
+    image: registry.c2.liara.ir/one-click-apps/supermemory:0.0.9
+    bundlePlanID: standard
+    planID: standard-base-g2
+    port: 6767
+
+    disks:
+      - name: data
+        mountTo: /data
+        size: 50
+        maxSize: 5
+
+    envs:
+      
+      SUPERMEMORY_HOST: "0.0.0.0"
+      OPENAI_BASE_URL: ""
+      OPENAI_API_KEY: ""
+      OPENAI_MODEL: "openai/gpt-6-luna"
+
+

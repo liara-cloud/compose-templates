@@ -1,0 +1,28 @@
+apps:
+  - id: "openmuse"
+    name: "OpenMuse"
+    image: "registry.c2.liara.ir/one-click-apps/openmuse:0.1.0"
+    bundlePlanID: "standard"
+    # API + embedded Chromium; set BROWSER_ENABLED to "false" for a smaller plan.
+    planID: "medium-g2"
+    port: 8787
+    disks:
+      - name: "data"
+        mountTo: "/data"
+    envs:
+      PUBLIC_API_URL: "https://$APP_NAME.liara.run"
+      DATABASE_URL: "postgres://$DB_main_USER:$DB_main_PASSWORD@$DB_main_HOST:$DB_main_PORT/postgres"
+      OPENMUSE_ACCESS_KEY: "$RANDOM_STRING$RANDOM_STRING"
+      # "openai/" + a model ID from Liara AI's list, e.g. openai/anthropic/claude-sonnet-5.5
+      MODEL: "openai/openai/gpt-6-luna"
+      OPENAI_API_KEY: ""
+      OPENAI_BASE_URL: ""
+      OPENAI_CHAT_COMPLETIONS: "true"
+      BROWSER_ENABLED: "true"
+
+databases:
+  - type: "postgres"
+    id: "main"
+    version: "15.4"
+    bundlePlanID: "standard"
+    planID: "small-g2"
